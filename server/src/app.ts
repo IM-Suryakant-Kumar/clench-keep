@@ -8,7 +8,7 @@ import notFoundMiddleware from "./middlewares/not-found";
 import errorHandlerMiddleware from "./middlewares/error-handler";
 import authRouter from "./routes/auth";
 
-config()
+config();
 const app = express();
 
 // constant
@@ -22,10 +22,10 @@ app.use(morgan("tiny"));
 app.use(cors({ origin: CLIENT_URL, credentials: true }));
 
 // routers
-app.use("/auth", authRouter)
+app.use("/auth", authRouter);
 
-app.use(notFoundMiddleware)
-app.use(errorHandlerMiddleware)
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 const start = async () => {
 	try {
 		app.listen(PORT, () =>

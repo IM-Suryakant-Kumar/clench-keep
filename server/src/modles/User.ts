@@ -5,9 +5,18 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new Schema<IUser>(
 	{
-		name: { type: String, required: [true, "Please provide name"] },
+		name: {
+			type: String,
+			minlength: [3, "name should not be less than 3 characters"],
+			required: [true, "Please provide name"],
+		},
 		email: { type: String, required: [true, "Please provide email"] },
-		password: { type: String, required: [true, "Please provide password"], select: false },
+		password: {
+			type: String,
+			minlength: [4, "password should not be less than 4 chracters"],
+			required: [true, "Please provide password"],
+			select: false,
+		},
 	},
 	{ timestamps: true }
 );

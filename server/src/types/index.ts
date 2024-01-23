@@ -1,11 +1,6 @@
 import { Request } from "express";
 import { Document } from "mongoose";
 
-export interface IReq extends Request {
-  body: { name?: string; email?: string; password?: string };
-  user?: IUser & { role?: string };
-}
-
 // User
 export interface IUser extends Document {
 	name: string;
@@ -15,12 +10,25 @@ export interface IUser extends Document {
 	comparePassword: (candidatePassword: string) => Promise<boolean>;
 	createJWTToken: () => string;
 }
-
+export interface IReq extends Request {
+	body: { name?: string; email?: string; password?: string };
+	user?: IUser & { role?: string };
+}
 
 // Note
 export interface INote extends Document {
-  title: string;
-  content: string;
-  backgound: string;
-  labels: string[];
+	title: string;
+	content: string;
+	backgound: string;
+	labels: string[];
+}
+
+export interface INoteReq extends Request {
+	body: {
+		title: string;
+		content: string;
+		background?: string;
+		labels?: string[];
+	};
+  params: { _id: string }
 }

@@ -5,8 +5,8 @@ const NoteSchema = new Schema<INote>(
 	{
 		title: { type: String, required: [true, "Please provide title"] },
 		content: { type: String, required: [true, "Please provide content"] },
-		backgound: { type: String, required: [true, "Please provide content"] },
-		labels: [{ type: String, required: true }],
+		backgound: { type: String },
+		labels: [{ type: String }],
 	},
 	{ timestamps: true }
 );

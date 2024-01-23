@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const userSchema = new Schema<IUser>(
+const UserSchema = new Schema<IUser>(
 	{
 		name: {
 			type: String,
@@ -21,19 +21,19 @@ const userSchema = new Schema<IUser>(
 	{ timestamps: true }
 );
 
-userSchema.pre("save", async function () {
+UserSchema.pre("save", async function () {
 	if (!this.isModified("password")) return;
 	const salt = await bcrypt.genSalt(10);
 	this.password = await bcrypt.hash(this.password, salt);
 });
 
-userSchema.methods.comparePassword = async function (
+UserSchema.methods.comparePassword = async function (
 	candidatePassword: string
 ) {
 	return await bcrypt.compare(candidatePassword, this.password);
 };
 
-userSchema.methods.createJWTToken = function () {
+UserSchema.methods.createJWTToken = function () {
 	const JWT_SECRET: string = process.env.JWT_SECRET;
 	const JWT_LIFETIME: string = process.env.JWT_LIFETIME;
 
@@ -42,4 +42,4 @@ userSchema.methods.createJWTToken = function () {
 	});
 };
 
-export default model<IUser>("User", userSchema);
+export default model<IUser>("User", UserSchema);

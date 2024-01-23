@@ -6,9 +6,11 @@ import morgan from "morgan";
 import cors from "cors";
 import notFoundMiddleware from "./middlewares/not-found";
 import errorHandlerMiddleware from "./middlewares/error-handler";
+import { authenticateUser } from "./middlewares/authentication";
 import authRouter from "./routes/auth";
+import noteRouter from "./routes/note";
 
-config()
+config();
 const app = express();
 
 // constant
@@ -22,10 +24,11 @@ app.use(morgan("tiny"));
 app.use(cors({ origin: CLIENT_URL, credentials: true }));
 
 // routers
-app.use("/auth", authRouter)
+app.use("/auth", authRouter);
+app.use("/note", authenticateUser, noteRouter);
 
-app.use(notFoundMiddleware)
-app.use(errorHandlerMiddleware)
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 const start = async () => {
 	try {
 		app.listen(PORT, () =>

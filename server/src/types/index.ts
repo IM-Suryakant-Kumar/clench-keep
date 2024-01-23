@@ -12,5 +12,5 @@ export interface IUser extends Document {
 
 export interface IReq extends Request {
 	body: { name?: string; email?: string; password?: string };
-  user?: IUser;
+  user?: IUser & { role?: string };
 }

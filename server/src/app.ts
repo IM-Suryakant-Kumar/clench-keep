@@ -6,6 +6,7 @@ import morgan from "morgan";
 import cors from "cors";
 import notFoundMiddleware from "./middlewares/not-found";
 import errorHandlerMiddleware from "./middlewares/error-handler";
+import authRouter from "./routes/auth";
 
 config()
 const app = express();
@@ -19,6 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(cors({ origin: CLIENT_URL, credentials: true }));
+
+// routers
+app.use("/auth", authRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

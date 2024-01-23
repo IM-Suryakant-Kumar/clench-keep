@@ -4,10 +4,8 @@ import { BadRequestError, UnauthenticatedError } from "../errors";
 import User from "../modles/User";
 import sendToken from "../utils/sendToken";
 
-export const register = async (req: Request, res: Response) => {
-	const {
-		body: { name, email, password },
-	} = req as IReq;
+export const register = async (req: IReq, res: Response) => {
+	const { name, email, password } = req.body;
 
 	if (!(name && email && password))
 		throw new BadRequestError("Please provide all values");
@@ -17,10 +15,8 @@ export const register = async (req: Request, res: Response) => {
 	sendToken(res, 201, user, "Registered Successfuly!");
 };
 
-export const login = async (req: Request, res: Response) => {
-	const {
-		body: { email, password },
-	} = req as IReq;
+export const login = async (req: IReq, res: Response) => {
+	const { email, password } = req.body;
 
 	if (!(email && password))
 		throw new BadRequestError("Please provide all values");
@@ -61,7 +57,7 @@ export const logout = async (req: Request, res: Response) => {
 };
 
 // get profile
-export const getProfile = async (req: Request, res: Response) => {
-	const { user } = req as IReq;
+export const getProfile = async (req: IReq, res: Response) => {
+	const user = req.user;
 	res.status(200).json({ success: true, user });
 };

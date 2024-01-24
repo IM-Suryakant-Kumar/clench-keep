@@ -3,7 +3,7 @@ import { INoteReq } from "index";
 import Note from "../modles/Note";
 
 export const createNote = async (req: INoteReq, res: Response) => {
-	const note = await Note.create(req.body);
+	const note = await Note.create({ userId: req.user._id, ...req.body });
 	res
 		.status(201)
 		.json({ success: true, note, message: "Note created successfully" });
@@ -15,8 +15,8 @@ export const getNote = async (req: INoteReq, res: Response) => {
 };
 
 export const getNotes = async (req: INoteReq, res: Response) => {
-  const notes = await Note.find();
-  res.status(200).json({ success: true, notes });
+	const notes = await Note.find({ userId: req.user._id });
+	res.status(200).json({ success: true, notes });
 };
 
 export const updateNote = async (req: INoteReq, res: Response) => {

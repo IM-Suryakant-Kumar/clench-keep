@@ -10,6 +10,7 @@ import { authenticateUser } from "./middlewares/authentication";
 import authRouter from "./routes/auth";
 import noteRouter from "./routes/note";
 import archiveRouter from "./routes/archive";
+import trashRouter from "./routes/trash";
 
 config();
 const app = express();
@@ -28,6 +29,7 @@ app.use(cors({ origin: CLIENT_URL, credentials: true }));
 app.use("/auth", authRouter);
 app.use("/note", authenticateUser, noteRouter);
 app.use("/archive", authenticateUser, archiveRouter);
+app.use("/trash", authenticateUser, trashRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

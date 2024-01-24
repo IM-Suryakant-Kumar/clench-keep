@@ -30,5 +30,17 @@ export interface INoteReq extends Request {
 		background?: string;
 		labels?: string[];
 	};
-  params: { _id: string }
+	params: { _id?: string };
+}
+
+// Archive
+export interface IArchive extends Document {
+	userId: string;
+	noteId: string;
+}
+
+export interface IArchiveReq extends Request {
+	body: { _id?: string };
+  params: { _id?: string };
+  user: IUser;
 }

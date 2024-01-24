@@ -40,7 +40,7 @@ export interface IArchive extends Document {
 }
 
 export interface IArchiveReq extends Request {
-	body: { _id?: string };
-  params: { _id?: string };
+	body: { noteId?: string };
+  params: { noteId?: string };
   user: IUser;
 }

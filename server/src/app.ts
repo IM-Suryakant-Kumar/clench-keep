@@ -9,6 +9,7 @@ import errorHandlerMiddleware from "./middlewares/error-handler";
 import { authenticateUser } from "./middlewares/authentication";
 import authRouter from "./routes/auth";
 import noteRouter from "./routes/note";
+import archiveRouter from "./routes/archive";
 
 config();
 const app = express();
@@ -26,6 +27,7 @@ app.use(cors({ origin: CLIENT_URL, credentials: true }));
 // routers
 app.use("/auth", authRouter);
 app.use("/note", authenticateUser, noteRouter);
+app.use("/archive", authenticateUser, archiveRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

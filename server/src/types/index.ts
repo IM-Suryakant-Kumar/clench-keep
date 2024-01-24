@@ -17,6 +17,7 @@ export interface IReq extends Request {
 
 // Note
 export interface INote extends Document {
+  userId: string;
 	title: string;
 	content: string;
 	backgound: string;
@@ -30,7 +31,8 @@ export interface INoteReq extends Request {
 		background?: string;
 		labels?: string[];
 	};
-	params: { _id?: string };
+  user: IUser;
+	params: { noteId?: string };
 }
 
 // Archive

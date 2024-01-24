@@ -46,3 +46,15 @@ export interface IArchiveReq extends Request {
   params: { noteId?: string };
   user: IUser;
 }
+
+// Trash
+export interface ITrash extends Document {
+	userId: string;
+	noteId: string;
+}
+
+export interface ITrashReq extends Request {
+	body: { noteId?: string };
+  params: { noteId?: string };
+  user: IUser;
+}

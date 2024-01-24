@@ -35,7 +35,7 @@ export const updateArchive = async (req: IArchiveReq, res: Response) => {
 	);
 	res
 		.status(200)
-		.json({ success: true, archive, message: "Note Updated Successfully" });
+		.json({ success: true, archive, message: "Archive Updated Successfully" });
 };
 
 export const deleteArchive = async (req: IArchiveReq, res: Response) => {

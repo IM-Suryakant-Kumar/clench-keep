@@ -7,6 +7,7 @@ import cors from "cors";
 import notFoundMiddleware from "./middlewares/not-found";
 import errorHandlerMiddleware from "./middlewares/error-handler";
 import { authenticateUser } from "./middlewares/authentication";
+import connectDB from "./db";
 import authRouter from "./routes/auth";
 import noteRouter from "./routes/note";
 import archiveRouter from "./routes/archive";
@@ -18,6 +19,7 @@ const app = express();
 // constant
 const PORT: number = parseInt(process.env.PORT, 10) || 4000;
 const CLIENT_URL: string = process.env.CLIENT_URL;
+const MONGO_URL: string = process.env.MONGO_URL;
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +37,7 @@ app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 const start = async () => {
 	try {
+		await connectDB(MONGO_URL);
 		app.listen(PORT, () =>
 			console.log(`Server is listening on port ${PORT}...`)
 		);

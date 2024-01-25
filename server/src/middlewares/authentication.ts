@@ -9,19 +9,20 @@ export const authenticateUser = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	let token = req.cookies;
+	let { token } = req.cookies;
 
-	if (!token) {
+	if (!token || token === "undefined") {
 		const authHeader = req.headers.authorization;
-		if (!(authHeader && authHeader.startsWith("Bearer")))
-			throw new UnauthenticatedError("Invalid Credentials!");
-
+		if (!authHeader || !authHeader.startsWith("Bearer"))
+			throw new UnauthenticatedError("Authentication Failed!");
 		token = authHeader.split(" ")[1];
 	}
 
+	if (!token || token === "null" || token === "undefined")
+		throw new UnauthenticatedError("Authentication Failed!");
+
 	const JWT_SECRET: string = process.env.JWT_SECRET;
 	const { _id } = jwt.verify(token, JWT_SECRET) as { _id: string };
-
 	req.user = await User.findById(_id);
 	next();
 };

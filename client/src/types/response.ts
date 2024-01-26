@@ -1,3 +1,4 @@
+import IArchive from "./archives";
 import INote from "./note";
 import { IUser } from "./user";
 
@@ -7,7 +8,9 @@ export interface Response {
 	token: string;
 	user: IUser;
 	notes: INote[];
-  note: INote;
+	note: INote;
+	archives: IArchive[];
+	archive: IArchive;
 }
 
 interface SuccessRes {

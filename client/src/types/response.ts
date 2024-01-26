@@ -1,5 +1,6 @@
-import IArchive from "./archives";
+import IArchive from "./archive";
 import INote from "./note";
+import ITrash from "./trash";
 import { IUser } from "./user";
 
 export interface Response {
@@ -11,6 +12,8 @@ export interface Response {
 	note: INote;
 	archives: IArchive[];
 	archive: IArchive;
+	trashes: ITrash[];
+	trash: ITrash;
 }
 
 interface SuccessRes {

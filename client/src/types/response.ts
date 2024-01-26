@@ -1,3 +1,4 @@
+import INote from "./note";
 import { IUser } from "./user";
 
 export interface Response {
@@ -5,6 +6,8 @@ export interface Response {
 	message: string;
 	token: string;
 	user: IUser;
+	notes: INote[];
+  note: INote;
 }
 
 interface SuccessRes {

@@ -1,5 +1,6 @@
 .cont {
 	text-align: center;
+  background-color: var(--secondary-cl);
 }
 
 .top {

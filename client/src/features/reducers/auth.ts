@@ -24,7 +24,7 @@ export const registerUser = createAsyncThunk(
 	"auth/register",
 	async (user: IUser, { rejectWithValue }) => {
 		const data = await register(user);
-		return data.success ? data.message : rejectWithValue(data.message);
+		return !data.success && rejectWithValue(data.message);
 	}
 );
 
@@ -32,7 +32,7 @@ export const loginUser = createAsyncThunk(
 	"auth/login",
 	async (user: IUser, { rejectWithValue }) => {
 		const data = await login(user);
-		return data.success ? data.message : rejectWithValue(data.message);
+		return !data.success && rejectWithValue(data.message);
 	}
 );
 
@@ -40,7 +40,7 @@ export const guestUserLogin = createAsyncThunk(
 	"auth/guest",
 	async (_, { rejectWithValue }) => {
 		const data = await guestLogin();
-		return data.success ? data.message : rejectWithValue(data.message);
+		return !data.success && rejectWithValue(data.message);
 	}
 );
 
@@ -48,7 +48,7 @@ export const logoutUser = createAsyncThunk(
 	"auth/logout",
 	async (_, { rejectWithValue }) => {
 		const data = await logout();
-		return data.success ? data.message : rejectWithValue(data.message);
+		return !data.success && rejectWithValue(data.message);
 	}
 );
 

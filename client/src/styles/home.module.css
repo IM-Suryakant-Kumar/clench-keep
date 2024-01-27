@@ -50,9 +50,8 @@
   padding: 0 1em;
 }
 
-.button {
+.link {
   background-color: var(--logo-cl);
-  border-style: var(--logo-cl);
 	color: var(--primary-cl);
 	padding: 0.5em 3em;
 	font-size: 1rem;
@@ -94,7 +93,8 @@
     height: 3.5rem;
   }
 
-  .button {
+  .link {
     padding: 0.6em 3.5em;
+    margin-bottom: 0;
   }
 }

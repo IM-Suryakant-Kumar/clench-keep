@@ -11,6 +11,7 @@ const HostLayout = () => {
 		<Navigate
 			to="/login"
 			state={{ message: "You have to login first", redirectTo: pathname }}
+			replace
 		/>
 	);
 };

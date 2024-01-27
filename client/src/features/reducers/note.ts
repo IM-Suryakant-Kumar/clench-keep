@@ -22,32 +22,32 @@ const initialState: NoteState = {
 export const getNotes = createAsyncThunk(
 	"note/notes",
 	async (_, { rejectWithValue }) => {
-		const data = await getNotesApi();
-		return data.success ? data.notes : rejectWithValue(data.message);
+		const { success, notes, message } = await getNotesApi();
+		return success ? notes : rejectWithValue(message);
 	}
 );
 
 export const createNote = createAsyncThunk(
 	"note/create",
 	async (note: INote, { rejectWithValue }) => {
-		const data = await createNoteApi(note);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await createNoteApi(note);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const updateNote = createAsyncThunk(
 	"note/update",
 	async (note: INote, { rejectWithValue }) => {
-		const data = await updateNoteApi(note._id, note);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await updateNoteApi(note._id, note);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const deleteNote = createAsyncThunk(
 	"note/remove",
 	async (noteId: string, { rejectWithValue }) => {
-		const data = await deletNoteApi(noteId);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await deletNoteApi(noteId);
+		return !success && rejectWithValue(message);
 	}
 );
 

@@ -8,8 +8,8 @@ const store = configureStore({
 	reducer: {
 		auth: authReducer,
 		note: noteReducer,
-		trash: trashReducer,
 		archive: archiveReducer,
+		trash: trashReducer,
 	},
 });
 

@@ -21,24 +21,24 @@ const initialState: TrashState = {
 export const getTrashes = createAsyncThunk(
 	"trash/trashes",
 	async (_, { rejectWithValue }) => {
-		const data = await getTrashesApi();
-		return data.success ? data.trashes : rejectWithValue(data.message);
+		const { success, trashes, message } = await getTrashesApi();
+		return success ? trashes : rejectWithValue(message);
 	}
 );
 
 export const createTrash = createAsyncThunk(
 	"trash/create",
 	async (trash: ITrash, { rejectWithValue }) => {
-		const data = await createTrashApi(trash);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await createTrashApi(trash);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const deleteTrash = createAsyncThunk(
 	"trash/delete",
 	async (noteId: string, { rejectWithValue }) => {
-		const data = await deleteTrashApi(noteId);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await deleteTrashApi(noteId);
+		return !success && rejectWithValue(message);
 	}
 );
 

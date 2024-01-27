@@ -23,40 +23,40 @@ const initialState: AuthState = {
 export const register = createAsyncThunk(
 	"auth/register",
 	async (user: IUser, { rejectWithValue }) => {
-		const data = await registerApi(user);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await registerApi(user);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const login = createAsyncThunk(
 	"auth/login",
 	async (user: IUser, { rejectWithValue }) => {
-		const data = await loginApi(user);
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await loginApi(user);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const guestLogin = createAsyncThunk(
 	"auth/guest",
 	async (_, { rejectWithValue }) => {
-		const data = await guestLoginApi();
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await guestLoginApi();
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const logout = createAsyncThunk(
 	"auth/logout",
 	async (_, { rejectWithValue }) => {
-		const data = await logoutApi();
-		return !data.success && rejectWithValue(data.message);
+		const { success, message } = await logoutApi();
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const getProfile = createAsyncThunk(
 	"auth/profile",
 	async (_, { rejectWithValue }) => {
-		const data = await getProfileApi();
-		return data.success ? data.user : rejectWithValue(data.message);
+		const { success, user, message } = await getProfileApi();
+		return success ? user : rejectWithValue(message);
 	}
 );
 

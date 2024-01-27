@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../types/user";
 import {
-	getProfile,
-	guestLogin,
-	login,
-	logout,
-	register,
+  register as registerApi,
+	login as loginApi,
+	guestLogin as guestLoginApi,
+	logout as logoutApi,
+	getProfile as getProfileApi,
 } from "../../apis/auth";
 
 interface AuthState {
@@ -20,42 +20,42 @@ const initialState: AuthState = {
 	isLoading: false,
 };
 
-export const registerUser = createAsyncThunk(
+export const register = createAsyncThunk(
 	"auth/register",
 	async (user: IUser, { rejectWithValue }) => {
-		const data = await register(user);
+		const data = await registerApi(user);
 		return !data.success && rejectWithValue(data.message);
 	}
 );
 
-export const loginUser = createAsyncThunk(
+export const login = createAsyncThunk(
 	"auth/login",
 	async (user: IUser, { rejectWithValue }) => {
-		const data = await login(user);
+		const data = await loginApi(user);
 		return !data.success && rejectWithValue(data.message);
 	}
 );
 
-export const guestUserLogin = createAsyncThunk(
+export const guestLogin = createAsyncThunk(
 	"auth/guest",
 	async (_, { rejectWithValue }) => {
-		const data = await guestLogin();
+		const data = await guestLoginApi();
 		return !data.success && rejectWithValue(data.message);
 	}
 );
 
-export const logoutUser = createAsyncThunk(
+export const logout = createAsyncThunk(
 	"auth/logout",
 	async (_, { rejectWithValue }) => {
-		const data = await logout();
+		const data = await logoutApi();
 		return !data.success && rejectWithValue(data.message);
 	}
 );
 
-export const getUserProfile = createAsyncThunk(
+export const getProfile = createAsyncThunk(
 	"auth/profile",
 	async (_, { rejectWithValue }) => {
-		const data = await getProfile();
+		const data = await getProfileApi();
 		return data.success ? data.user : rejectWithValue(data.message);
 	}
 );
@@ -66,54 +66,54 @@ const authSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
-			.addCase(registerUser.pending, state => {
+			.addCase(register.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(registerUser.fulfilled, state => {
+			.addCase(register.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(registerUser.rejected, (state, action) => {
+			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(loginUser.pending, state => {
+			.addCase(login.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(loginUser.fulfilled, state => {
+			.addCase(login.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(loginUser.rejected, (state, action) => {
+			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(guestUserLogin.pending, state => {
+			.addCase(guestLogin.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(guestUserLogin.fulfilled, state => {
+			.addCase(guestLogin.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(guestUserLogin.rejected, (state, action) => {
+			.addCase(guestLogin.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(logoutUser.pending, state => {
+			.addCase(logout.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(logoutUser.fulfilled, state => {
+			.addCase(logout.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(logoutUser.rejected, (state, action) => {
+			.addCase(logout.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(getUserProfile.pending, state => {
+			.addCase(getProfile.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(getUserProfile.fulfilled, (state, action) => {
+			.addCase(getProfile.fulfilled, (state, action) => {
 				state.isLoading = false;
         state.user = action.payload
 			})
-			.addCase(getUserProfile.rejected, (state, action) => {
+			.addCase(getProfile.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})

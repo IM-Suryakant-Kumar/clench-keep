@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import INote from "../../types/note";
-import { createNote, deletNote, getNotes, updateNote } from "../../apis/note";
+import {
+	getNotes as getNotesApi,
+	createNote as createNoteApi,
+	updateNote as updateNoteApi,
+	deletNote as deletNoteApi,
+} from "../../apis/note";
 
 interface NoteState {
 	notes: INote[] | null;
@@ -14,34 +19,34 @@ const initialState: NoteState = {
 	isLoading: false,
 };
 
-export const getAllnotes = createAsyncThunk(
+export const getNotes = createAsyncThunk(
 	"note/notes",
 	async (_, { rejectWithValue }) => {
-		const data = await getNotes();
+		const data = await getNotesApi();
 		return data.success ? data.notes : rejectWithValue(data.message);
 	}
 );
 
-export const AddNote = createAsyncThunk(
-	"note/add",
+export const createNote = createAsyncThunk(
+	"note/create",
 	async (note: INote, { rejectWithValue }) => {
-		const data = await createNote(note);
+		const data = await createNoteApi(note);
 		return !data.success && rejectWithValue(data.message);
 	}
 );
 
-export const updateSingleNote = createAsyncThunk(
+export const updateNote = createAsyncThunk(
 	"note/update",
 	async (note: INote, { rejectWithValue }) => {
-		const data = await updateNote(note._id, note);
+		const data = await updateNoteApi(note._id, note);
 		return !data.success && rejectWithValue(data.message);
 	}
 );
 
-export const removeNote = createAsyncThunk(
+export const deleteNote = createAsyncThunk(
 	"note/remove",
 	async (noteId: string, { rejectWithValue }) => {
-		const data = await deletNote(noteId);
+		const data = await deletNoteApi(noteId);
 		return !data.success && rejectWithValue(data.message);
 	}
 );
@@ -52,44 +57,44 @@ const noteSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
-			.addCase(getAllnotes.pending, state => {
+			.addCase(getNotes.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(getAllnotes.fulfilled, (state, action) => {
+			.addCase(getNotes.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.notes = action.payload;
 			})
-			.addCase(getAllnotes.rejected, (state, action) => {
+			.addCase(getNotes.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(AddNote.pending, state => {
+			.addCase(createNote.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(AddNote.fulfilled, state => {
+			.addCase(createNote.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(AddNote.rejected, (state, action) => {
+			.addCase(createNote.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(updateSingleNote.pending, state => {
+			.addCase(updateNote.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(updateSingleNote.fulfilled, state => {
+			.addCase(updateNote.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(updateSingleNote.rejected, (state, action) => {
+			.addCase(updateNote.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(removeNote.pending, state => {
+			.addCase(deleteNote.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(removeNote.fulfilled, state => {
+			.addCase(deleteNote.fulfilled, state => {
 				state.isLoading = false;
 			})
-			.addCase(removeNote.rejected, (state, action) => {
+			.addCase(deleteNote.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			});

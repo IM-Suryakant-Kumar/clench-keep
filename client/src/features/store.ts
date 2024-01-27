@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./reducers/auth";
 import noteReducer from "./reducers/note";
 import trashReducer from "./reducers/trash";
+import archiveReducer from "./reducers/archive";
 
 const store = configureStore({
 	reducer: {
 		auth: authReducer,
 		note: noteReducer,
 		trash: trashReducer,
+		archive: archiveReducer,
 	},
 });
 

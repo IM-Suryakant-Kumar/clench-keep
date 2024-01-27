@@ -1,5 +1,6 @@
 import Notebook from "../assets/notebook.svg";
 import styles from "../styles/home.module.css";
+import { GiPencil } from "react-icons/gi";
 
 const Home = () => {
 	return (
@@ -10,6 +11,7 @@ const Home = () => {
 
 			<div className={styles.bottom}>
 				<h2 className={styles.logo}>ClenchKeep</h2>
+        <GiPencil className={styles.pen} />
 				<p className={styles.title}>A modern way to Keep and handle your notes digitally</p>
 				<button className={styles.button}>Get Started</button>
 			</div>

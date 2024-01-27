@@ -5,9 +5,6 @@ const HostLayout = () => {
 	const user = useAppSelector(state => state.auth.user);
 	const pathname = useLocation().pathname;
 
-	console.log(user);
-	console.log(pathname);
-
 	return user ? (
 		<Outlet />
 	) : (

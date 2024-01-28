@@ -5,8 +5,8 @@ import {
 	login,
 	logout,
 	register,
-} from "../controllers/auth";
-import { authenticateUser } from "../middlewares/authentication";
+} from "../controllers";
+import { authenticateUser } from "../middlewares";
 
 const router = Router();
 

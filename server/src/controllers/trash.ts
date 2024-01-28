@@ -1,10 +1,10 @@
 import { Response } from "express";
 import { ITrashReq } from "index";
-import Trash from "../modles/Trash";
+import { Trash } from "../models";
 
 export const getTrashes = async (req: ITrashReq, res: Response) => {
-  const trashes = await Trash.find({ userId: req.user._id });
-  res.status(200).json({ success: true, trashes });
+	const trashes = await Trash.find({ userId: req.user._id });
+	res.status(200).json({ success: true, trashes });
 };
 
 export const createTrash = async (req: ITrashReq, res: Response) => {

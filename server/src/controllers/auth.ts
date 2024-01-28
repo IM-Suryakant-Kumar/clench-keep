@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { IReq } from "index";
 import { BadRequestError, UnauthenticatedError } from "../errors";
-import User from "../modles/User";
-import sendToken from "../utils/sendToken";
+import { User } from "../models";
+import { sendToken } from "../utils";
 
 export const register = async (req: IReq, res: Response) => {
 	const { name, email, password } = req.body;

@@ -1,17 +1,16 @@
 import "express-async-errors";
 import { config } from "dotenv";
 import express from "express";
+import connectDB from "./db";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
-import notFoundMiddleware from "./middlewares/not-found";
-import errorHandlerMiddleware from "./middlewares/error-handler";
-import { authenticateUser } from "./middlewares/authentication";
-import connectDB from "./db";
-import authRouter from "./routes/auth";
-import noteRouter from "./routes/note";
-import archiveRouter from "./routes/archive";
-import trashRouter from "./routes/trash";
+import {
+	notFoundMiddleware,
+	errorHandlerMiddleware,
+	authenticateUser,
+} from "./middlewares";
+import { authRouter, noteRouter, archiveRouter, trashRouter } from "./routes";
 
 config();
 const app = express();

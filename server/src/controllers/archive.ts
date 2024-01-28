@@ -1,10 +1,10 @@
 import { Response } from "express";
 import { IArchiveReq } from "index";
-import Archive from "../modles/Archive";
+import { Archive } from "../models";
 
 export const getArchives = async (req: IArchiveReq, res: Response) => {
-  const archives = await Archive.find({ userId: req.user._id });
-  res.status(200).json({ success: true, archives });
+	const archives = await Archive.find({ userId: req.user._id });
+	res.status(200).json({ success: true, archives });
 };
 
 export const createArchive = async (req: IArchiveReq, res: Response) => {

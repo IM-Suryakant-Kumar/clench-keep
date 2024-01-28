@@ -33,7 +33,7 @@ export const login = async (req: IReq, res: Response) => {
 	sendToken(res, 200, user, "Logged in successfully!");
 };
 
-export const gusetLogin = async (req: Request, res: Response) => {
+export const guestLogin = async (req: Request, res: Response) => {
 	const email: string = process.env.GUEST_EMAIL;
 	const password: string = process.env.GUEST_PASSWORD;
 

@@ -59,6 +59,7 @@ const noteSlice = createSlice({
 		builder
 			.addCase(getNotes.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(getNotes.fulfilled, (state, action) => {
 				state.isLoading = false;
@@ -70,6 +71,7 @@ const noteSlice = createSlice({
 			})
 			.addCase(createNote.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(createNote.fulfilled, state => {
 				state.isLoading = false;
@@ -80,6 +82,7 @@ const noteSlice = createSlice({
 			})
 			.addCase(updateNote.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(updateNote.fulfilled, state => {
 				state.isLoading = false;
@@ -90,6 +93,7 @@ const noteSlice = createSlice({
 			})
 			.addCase(deleteNote.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(deleteNote.fulfilled, state => {
 				state.isLoading = false;

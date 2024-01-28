@@ -11,12 +11,14 @@ import {
 interface AuthState {
 	user: IUser | null;
 	errorMessage: string | null;
+  isSubmitting: boolean;
 	isLoading: boolean;
 }
 
 const initialState: AuthState = {
 	user: null,
 	errorMessage: null,
+  isSubmitting: false,
 	isLoading: false,
 };
 
@@ -67,27 +69,30 @@ const authSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(register.pending, state => {
-				state.isLoading = true;
+				state.isSubmitting = true;
+        state.errorMessage = null;
 			})
 			.addCase(register.fulfilled, state => {
-				state.isLoading = false;
+				state.isSubmitting = false;
 			})
 			.addCase(register.rejected, (state, action) => {
-				state.isLoading = false;
+				state.isSubmitting = false;
 				state.errorMessage = action.payload as string;
 			})
 			.addCase(login.pending, state => {
-				state.isLoading = true;
+				state.isSubmitting = true;
+        state.errorMessage = null;
 			})
 			.addCase(login.fulfilled, state => {
-				state.isLoading = false;
+				state.isSubmitting = false;
 			})
 			.addCase(login.rejected, (state, action) => {
-				state.isLoading = false;
+				state.isSubmitting = false;
 				state.errorMessage = action.payload as string;
 			})
 			.addCase(guestLogin.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(guestLogin.fulfilled, state => {
 				state.isLoading = false;
@@ -98,6 +103,7 @@ const authSlice = createSlice({
 			})
 			.addCase(logout.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(logout.fulfilled, state => {
 				state.isLoading = false;
@@ -108,6 +114,7 @@ const authSlice = createSlice({
 			})
 			.addCase(getProfile.pending, state => {
 				state.isLoading = true;
+        state.errorMessage = null;
 			})
 			.addCase(getProfile.fulfilled, (state, action) => {
 				state.isLoading = false;

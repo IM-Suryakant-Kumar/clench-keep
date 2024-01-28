@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import INote from "../../types/note";
+import { INote } from "../../types";
 import {
 	getNotes as getNotesApi,
 	createNote as createNoteApi,
 	updateNote as updateNoteApi,
 	deletNote as deletNoteApi,
-} from "../../apis/note";
+} from "../../apis";
 
 interface NoteState {
 	notes: INote[] | null;

@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import styles from "../styles/login.module.css";
 
 const Login = () => {
   const { message, redirectTo } = useLocation().state
@@ -6,7 +7,7 @@ const Login = () => {
   console.log(message, redirectTo)
 
   return (
-    <div>Login</div>
+    <div className={styles.container}>Login</div>
   );
 }
 

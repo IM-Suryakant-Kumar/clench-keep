@@ -1,7 +1,4 @@
-import IArchive from "./archive";
-import INote from "./note";
-import ITrash from "./trash";
-import { IUser } from "./user";
+import { IArchive, INote, ITrash, IUser } from ".";
 
 export interface Response {
 	success: boolean;
@@ -28,4 +25,4 @@ interface FailedRes {
 	};
 }
 
-export default interface IApiRes extends SuccessRes, FailedRes {}
+export interface IApiRes extends SuccessRes, FailedRes {}

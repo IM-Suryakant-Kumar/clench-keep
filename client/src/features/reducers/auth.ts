@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../types/user";
+import { IUser } from "../../types";
 import {
   register as registerApi,
 	login as loginApi,
 	guestLogin as guestLoginApi,
 	logout as logoutApi,
 	getProfile as getProfileApi,
-} from "../../apis/auth";
+} from "../../apis";
 
 interface AuthState {
 	user: IUser | null;

@@ -1,9 +1,9 @@
-import IArchive from "../../types/archive";
+import { IArchive } from "../../types";
 import {
 	getArchives as getArchivesApi,
 	createArchive as createArchiveApi,
 	deleteArchive as deleteArchiveApi,
-} from "../../apis/archive";
+} from "../../apis";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface ArchiveState {

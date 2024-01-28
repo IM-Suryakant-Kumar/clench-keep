@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ITrash from "../../types/trash";
+import { ITrash } from "../../types";
 import {
 	getTrashes as getTrashesApi,
 	createTrash as createTrashApi,
 	deleteTrash as deleteTrashApi,
-} from "../../apis/trash";
+} from "../../apis";
 
 interface TrashState {
 	trashes: ITrash[] | null;
@@ -82,4 +82,4 @@ const trashSlice = createSlice({
 	},
 });
 
-export default trashSlice.reducer
+export default trashSlice.reducer;

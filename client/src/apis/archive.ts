@@ -1,9 +1,7 @@
+import { axios } from ".";
 import { toast } from "react-toastify";
-import IApiRes from "../types/response";
-import asyncWrapper from "../utils/asyncWrapper";
-import { getTokenFromLocalStorage } from "../utils/handleToken";
-import axios from "./axios";
-import IArchive from "../types/archive";
+import { IApiRes, IArchive } from "../types";
+import { asyncWrapper, getTokenFromLocalStorage } from "../utils";
 
 export const getArchives = () =>
 	asyncWrapper(async () => {

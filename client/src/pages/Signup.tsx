@@ -14,7 +14,7 @@ const Signup = () => {
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
 		dispatch(register({ name, email, password }));
-		setTimeout(() => dispatch(getProfile), 1000);
+		setTimeout(() => dispatch(getProfile), 500);
 	};
 
 	return (

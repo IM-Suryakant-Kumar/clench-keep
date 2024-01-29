@@ -23,7 +23,7 @@ const Login = () => {
 
 	const handleGuestLogin = async () => {
 		dispatch(guestLogin());
-		setTimeout(() => dispatch(getProfile()), 1000);
+		setTimeout(() => dispatch(getProfile()), 500);
 	};
 
 	return (

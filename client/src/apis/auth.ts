@@ -10,7 +10,7 @@ import {
 
 export const register = (user: IUser) =>
 	asyncWrapper(async () => {
-		const { data } = (await axios.post("/auth/resister", user)) as IApiRes;
+		const { data } = (await axios.post("/auth/register", user)) as IApiRes;
 		addTokenToLocalStorage(data.token);
 		toast.success(data.message);
 		return data;

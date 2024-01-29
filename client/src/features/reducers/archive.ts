@@ -50,11 +50,11 @@ const archiveSlice = createSlice({
 		builder
 			.addCase(getArchives.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(getArchives.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.archives = action.payload;
+        state.errorMessage = null;
 			})
 			.addCase(getArchives.rejected, (state, action) => {
 				state.isLoading = false;
@@ -62,10 +62,10 @@ const archiveSlice = createSlice({
 			})
 			.addCase(createArchive.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(createArchive.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(createArchive.rejected, (state, action) => {
 				state.isLoading = false;
@@ -73,10 +73,10 @@ const archiveSlice = createSlice({
 			})
 			.addCase(deleteArchive.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(deleteArchive.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(deleteArchive.rejected, (state, action) => {
 				state.isLoading = false;

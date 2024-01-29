@@ -1,34 +1,39 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/login.module.css";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../features/hook";
-import { guestLogin, login } from "../features/reducers";
+import { getProfile, login } from "../features/reducers";
+import { IUser } from "../types";
+import { guestLogin } from "../apis";
 
 const Login = () => {
 	const state = useLocation().state;
-	const { errorMessage, isSubmitting, isLoading } = useAppSelector(
+	const navigate = useNavigate();
+	const { user, errorMessage, isSubmitting, isLoading } = useAppSelector(
 		state => state.auth
 	);
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 	const pathname = state?.redirectTo || "/host";
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
-		const name = formData.get("name") as string;
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
-		dispatch(login({ name, email, password }));
-		!errorMessage && navigate(pathname, { replace: true });
+		await dispatch(login({ email, password } as IUser));
 	};
 
-	const handleGuestLogin = () => {
-		dispatch(guestLogin());
-		!errorMessage && navigate(pathname, { replace: true });
+	const handleGuestLogin = async () => {
+		// await dispatch(guestLogin());
+		const data = await guestLogin();
+		data.success && navigate(pathname, { replace: true });
 	};
 
-	return (
+	console.log(user);
+
+	return user ? (
+		<Navigate to={pathname} replace />
+	) : (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
 				<h2 className={styles.title}>Log In</h2>
@@ -37,29 +42,21 @@ const Login = () => {
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<input
 						className={styles.input}
-						type="text"
-						name="name"
-						placeholder="Name:"
-						minLength={3}
+						type="email"
+						name="email"
+						placeholder="Email:"
 						required
 						autoFocus
 					/>
 					<input
 						className={styles.input}
-						type="email"
-						name="email"
-						placeholder="email:"
-						required
-					/>
-					<input
-						className={styles.input}
 						type="password"
 						name="password"
-						placeholder="password:"
+						placeholder="Password:"
 						minLength={4}
 						required
 					/>
-					<button className={styles.lgbtn} disabled={isLoading}>
+					<button className={styles.lgbtn} disabled={isSubmitting}>
 						{isSubmitting ? "Loggin in..." : "login"}
 					</button>
 					<button

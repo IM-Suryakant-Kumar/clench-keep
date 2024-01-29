@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../types";
 import {
-  register as registerApi,
+	register as registerApi,
 	login as loginApi,
 	guestLogin as guestLoginApi,
 	logout as logoutApi,
@@ -11,46 +11,48 @@ import {
 interface AuthState {
 	user: IUser | null;
 	errorMessage: string | null;
-  isSubmitting: boolean;
+	isSubmitting: boolean;
 	isLoading: boolean;
+	isProfileLoading: boolean;
 }
 
 const initialState: AuthState = {
 	user: null,
 	errorMessage: null,
-  isSubmitting: false,
+	isSubmitting: false,
 	isLoading: false,
+	isProfileLoading: false,
 };
 
 export const register = createAsyncThunk(
 	"auth/register",
-	async (user: IUser, { rejectWithValue }) => {
-		const { success, message } = await registerApi(user);
-		return !success && rejectWithValue(message);
+	async (cred: IUser, { rejectWithValue }) => {
+		const { success, user, message } = await registerApi(cred);
+		return success ? user : rejectWithValue(message);
 	}
 );
 
 export const login = createAsyncThunk(
 	"auth/login",
-	async (user: IUser, { rejectWithValue }) => {
-		const { success, message } = await loginApi(user);
-		return !success && rejectWithValue(message);
+	async (cred: IUser, { rejectWithValue }) => {
+		const { success, user, message } = await loginApi(cred);
+		return success ? user : rejectWithValue(message);
 	}
 );
 
 export const guestLogin = createAsyncThunk(
 	"auth/guest",
 	async (_, { rejectWithValue }) => {
-		const { success, message } = await guestLoginApi();
-		return !success && rejectWithValue(message);
+		const { success, user, message } = await guestLoginApi();
+		return success ? user : rejectWithValue(message);
 	}
 );
 
 export const logout = createAsyncThunk(
 	"auth/logout",
 	async (_, { rejectWithValue }) => {
-		const { success, message } = await logoutApi();
-		return !success && rejectWithValue(message);
+		const { success, user, message } = await logoutApi();
+		return success ? user : rejectWithValue(message);
 	}
 );
 
@@ -70,10 +72,11 @@ const authSlice = createSlice({
 		builder
 			.addCase(register.pending, state => {
 				state.isSubmitting = true;
-        state.errorMessage = null;
 			})
 			.addCase(register.fulfilled, state => {
 				state.isSubmitting = false;
+				state.errorMessage = null;
+				// state.user =
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isSubmitting = false;
@@ -81,10 +84,10 @@ const authSlice = createSlice({
 			})
 			.addCase(login.pending, state => {
 				state.isSubmitting = true;
-        state.errorMessage = null;
 			})
 			.addCase(login.fulfilled, state => {
 				state.isSubmitting = false;
+				state.errorMessage = null;
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isSubmitting = false;
@@ -92,10 +95,10 @@ const authSlice = createSlice({
 			})
 			.addCase(guestLogin.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(guestLogin.fulfilled, state => {
 				state.isLoading = false;
+				state.errorMessage = null;
 			})
 			.addCase(guestLogin.rejected, (state, action) => {
 				state.isLoading = false;
@@ -103,27 +106,26 @@ const authSlice = createSlice({
 			})
 			.addCase(logout.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(logout.fulfilled, state => {
 				state.isLoading = false;
+				state.errorMessage = null;
 			})
 			.addCase(logout.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
 			.addCase(getProfile.pending, state => {
-				state.isLoading = true;
-        state.errorMessage = null;
+				state.isProfileLoading = true;
 			})
 			.addCase(getProfile.fulfilled, (state, action) => {
-				state.isLoading = false;
-        state.user = action.payload
+				state.isProfileLoading = false;
+				state.user = action.payload;
+				state.errorMessage = null;
 			})
-			.addCase(getProfile.rejected, (state, action) => {
-				state.isLoading = false;
-				state.errorMessage = action.payload as string;
-			})
+			.addCase(getProfile.rejected, state => {
+				state.isProfileLoading = false;
+			});
 	},
 });
 

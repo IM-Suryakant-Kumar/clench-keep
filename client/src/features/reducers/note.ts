@@ -59,11 +59,11 @@ const noteSlice = createSlice({
 		builder
 			.addCase(getNotes.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(getNotes.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.notes = action.payload;
+        state.errorMessage = null;
 			})
 			.addCase(getNotes.rejected, (state, action) => {
 				state.isLoading = false;
@@ -71,10 +71,10 @@ const noteSlice = createSlice({
 			})
 			.addCase(createNote.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(createNote.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(createNote.rejected, (state, action) => {
 				state.isLoading = false;
@@ -82,10 +82,10 @@ const noteSlice = createSlice({
 			})
 			.addCase(updateNote.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(updateNote.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(updateNote.rejected, (state, action) => {
 				state.isLoading = false;
@@ -93,10 +93,10 @@ const noteSlice = createSlice({
 			})
 			.addCase(deleteNote.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(deleteNote.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(deleteNote.rejected, (state, action) => {
 				state.isLoading = false;

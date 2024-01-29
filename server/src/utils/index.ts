@@ -16,5 +16,5 @@ export const sendToken = (
 			httpOnly: true,
 		})
 		.status(statusCode)
-		.json({ success: true, token, message });
+		.json({ success: true, user, token, message });
 };

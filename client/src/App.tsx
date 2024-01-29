@@ -4,8 +4,8 @@ import {
 	createBrowserRouter,
 	createRoutesFromElements,
 } from "react-router-dom";
-import { HostLayout, Layout } from "./components";
-import { Home, Login, NotFound } from "./pages";
+import { AuthLayout, HostLayout, Layout } from "./components";
+import { Home, Login, NotFound, Signup } from "./pages";
 
 function App() {
 	const router = createBrowserRouter(
@@ -17,8 +17,10 @@ function App() {
 					<Route path="archive" element={<h1>Archive</h1>} />
 					<Route path="trash" element={<h1>Trash</h1>} />
 				</Route>
-				<Route path="login" element={<Login />} />
-				<Route path="signup" element={<h1>SignUp</h1>} />
+				<Route path="/login" element={<AuthLayout />}>
+					<Route index element={<Login />} />
+					<Route path="signup" element={<Signup />} />
+				</Route>
 				<Route path="*" element={<NotFound />} />
 			</Route>
 		)

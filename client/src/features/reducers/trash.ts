@@ -50,11 +50,11 @@ const trashSlice = createSlice({
 		builder
 			.addCase(getTrashes.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(getTrashes.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.trashes = action.payload;
+        state.errorMessage = null;
 			})
 			.addCase(getTrashes.rejected, (state, action) => {
 				state.isLoading = false;
@@ -62,10 +62,10 @@ const trashSlice = createSlice({
 			})
 			.addCase(createTrash.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(createTrash.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(createTrash.rejected, (state, action) => {
 				state.isLoading = false;
@@ -73,10 +73,10 @@ const trashSlice = createSlice({
 			})
 			.addCase(deleteTrash.pending, state => {
 				state.isLoading = true;
-        state.errorMessage = null;
 			})
 			.addCase(deleteTrash.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(deleteTrash.rejected, (state, action) => {
 				state.isLoading = false;

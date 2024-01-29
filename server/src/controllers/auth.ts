@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { IReq } from "index";
 import { BadRequestError, UnauthenticatedError } from "../errors";
-import User from "../modles/User";
-import sendToken from "../utils/sendToken";
+import { User } from "../models";
+import { sendToken } from "../utils";
 
 export const register = async (req: IReq, res: Response) => {
 	const { name, email, password } = req.body;
@@ -33,7 +33,7 @@ export const login = async (req: IReq, res: Response) => {
 	sendToken(res, 200, user, "Logged in successfully!");
 };
 
-export const gusetLogin = async (req: Request, res: Response) => {
+export const guestLogin = async (req: Request, res: Response) => {
 	const email: string = process.env.GUEST_EMAIL;
 	const password: string = process.env.GUEST_PASSWORD;
 

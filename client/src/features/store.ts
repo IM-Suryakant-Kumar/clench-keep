@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./reducers/auth";
-import noteReducer from "./reducers/note";
-import trashReducer from "./reducers/trash";
-import archiveReducer from "./reducers/archive";
+import {
+	archiveReducer,
+	authReducer,
+	noteReducer,
+	trashReducer,
+} from "./reducers";
 
 const store = configureStore({
 	reducer: {

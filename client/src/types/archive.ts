@@ -1,4 +1,4 @@
-export default interface IArchive {
+export interface IArchive {
   userId: string;
   noteId: string;
   createdAt: Date;

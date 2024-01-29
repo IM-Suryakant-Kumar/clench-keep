@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ITrash from "../../types/trash";
+import { ITrash } from "../../types";
 import {
 	getTrashes as getTrashesApi,
 	createTrash as createTrashApi,
 	deleteTrash as deleteTrashApi,
-} from "../../apis/trash";
+} from "../../apis";
 
 interface TrashState {
 	trashes: ITrash[] | null;
@@ -54,6 +54,7 @@ const trashSlice = createSlice({
 			.addCase(getTrashes.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.trashes = action.payload;
+        state.errorMessage = null;
 			})
 			.addCase(getTrashes.rejected, (state, action) => {
 				state.isLoading = false;
@@ -64,6 +65,7 @@ const trashSlice = createSlice({
 			})
 			.addCase(createTrash.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(createTrash.rejected, (state, action) => {
 				state.isLoading = false;
@@ -74,6 +76,7 @@ const trashSlice = createSlice({
 			})
 			.addCase(deleteTrash.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(deleteTrash.rejected, (state, action) => {
 				state.isLoading = false;
@@ -82,4 +85,4 @@ const trashSlice = createSlice({
 	},
 });
 
-export default trashSlice.reducer
+export default trashSlice.reducer;

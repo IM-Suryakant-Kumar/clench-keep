@@ -1,0 +1,79 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  background-color: var(--secondary-cl);
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25em;
+  padding: 1.5em 1em;
+}
+
+.title {
+  color: var(--logo-cl);
+  font-family: "Cinzel", serif;
+}
+
+.message {
+  margin-top: 1em;
+  font-size: smaller;
+  color: red;
+}
+
+.form {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+.input {
+  background-color: var(--secondary-cl);
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid var(--logo-cl);
+  margin-bottom: 0.5em;
+  padding: 0.5em 0 0.5em 1em;
+  box-shadow: 1px 1px 4px 1px #00000014 inset;
+}
+
+
+.lgbtn {
+  width: 100%;
+  margin-top: 1.5em;
+  border: none;
+  background-color: var(--logo-cl);
+  color: var(--primary-cl);
+  padding: 0.4em 0;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.glgbtn {
+  width: 100%;
+  margin-top: 0.5em;
+  border: none;
+  background-color: var(--primary-cl);
+  color: var(--logo-cl);
+  border: 1px solid var(--logo-cl);
+  padding: 0.4em 0;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.subtitle {
+  margin-top: 1.5em;
+  font-size: small;
+  color: gray;
+}
+.link {
+  color: var(--logo-cl);
+  font-weight: 600;
+}

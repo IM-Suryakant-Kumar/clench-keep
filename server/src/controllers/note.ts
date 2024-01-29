@@ -1,10 +1,10 @@
 import { Response } from "express";
 import { INoteReq } from "index";
-import Note from "../modles/Note";
+import { Note } from "../models";
 
 export const getNotes = async (req: INoteReq, res: Response) => {
-  const notes = await Note.find({ userId: req.user._id });
-  res.status(200).json({ success: true, notes });
+	const notes = await Note.find({ userId: req.user._id });
+	res.status(200).json({ success: true, notes });
 };
 
 export const createNote = async (req: INoteReq, res: Response) => {

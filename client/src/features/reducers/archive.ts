@@ -1,9 +1,9 @@
-import IArchive from "../../types/archive";
+import { IArchive } from "../../types";
 import {
 	getArchives as getArchivesApi,
 	createArchive as createArchiveApi,
 	deleteArchive as deleteArchiveApi,
-} from "../../apis/archive";
+} from "../../apis";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface ArchiveState {
@@ -54,6 +54,7 @@ const archiveSlice = createSlice({
 			.addCase(getArchives.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.archives = action.payload;
+        state.errorMessage = null;
 			})
 			.addCase(getArchives.rejected, (state, action) => {
 				state.isLoading = false;
@@ -64,6 +65,7 @@ const archiveSlice = createSlice({
 			})
 			.addCase(createArchive.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(createArchive.rejected, (state, action) => {
 				state.isLoading = false;
@@ -74,6 +76,7 @@ const archiveSlice = createSlice({
 			})
 			.addCase(deleteArchive.fulfilled, state => {
 				state.isLoading = false;
+        state.errorMessage = null;
 			})
 			.addCase(deleteArchive.rejected, (state, action) => {
 				state.isLoading = false;

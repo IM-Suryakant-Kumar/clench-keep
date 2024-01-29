@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { IUser } from "index";
 
-const sendToken = (
+export const sendToken = (
 	res: Response,
 	statusCode: number,
 	user: IUser,
@@ -18,5 +18,3 @@ const sendToken = (
 		.status(statusCode)
 		.json({ success: true, token, message });
 };
-
-export default sendToken;

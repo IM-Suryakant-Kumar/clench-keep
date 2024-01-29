@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UnauthenticatedError, UnauthorizedError } from "../errors";
 import jwt from "jsonwebtoken";
-import User from "../modles/User";
+import User from "../models/User";
 import { IReq } from "index";
 
 export const authenticateUser = async (

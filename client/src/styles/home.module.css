@@ -24,7 +24,7 @@
 }
 
 .logo {
-  font-family: "Cinzel Decorative", serif;
+  font-family: "Cinzel", serif;
   font-size: x-large;
   font-weight: 600;
   color: var(--logo-cl);
@@ -32,6 +32,13 @@
   border-right: 4px solid var(--logo-cl);
   border-radius: 0.25em;
   padding: 0.25em 2em;
+}
+
+.pen {
+  margin-top: 2em;
+  width: 3rem;
+  height: 3rem;
+  color: var(--logo-cl);
 }
 
 .title {
@@ -43,14 +50,14 @@
   padding: 0 1em;
 }
 
-.button {
+.link {
   background-color: var(--logo-cl);
-  border-style: var(--logo-cl);
 	color: var(--primary-cl);
 	padding: 0.5em 3em;
 	font-size: 1rem;
   font-weight: 600;
 	border-radius: 0.2em;
+  margin-bottom: 2em;
 }
 
 @media screen and (min-width: 768px) {
@@ -81,7 +88,13 @@
     padding: 0.25em 3em;
   }
 
-  .button {
+  .pen {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .link {
     padding: 0.6em 3.5em;
+    margin-bottom: 0;
   }
 }

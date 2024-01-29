@@ -5,7 +5,7 @@ import {
 	getTrash,
 	getTrashes,
 	updateTrash,
-} from "../controllers/trash";
+} from "../controllers";
 
 const router = Router();
 

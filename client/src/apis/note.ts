@@ -1,9 +1,7 @@
+import { axios } from ".";
 import { toast } from "react-toastify";
-import IApiRes from "../types/response";
-import asyncWrapper from "../utils/asyncWrapper";
-import { getTokenFromLocalStorage } from "../utils/handleToken";
-import axios from "./axios";
-import INote from "../types/note";
+import { IApiRes, INote } from "../types";
+import { asyncWrapper, getTokenFromLocalStorage } from "../utils";
 
 export const getNotes = () =>
 	asyncWrapper(async () => {

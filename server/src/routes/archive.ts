@@ -5,7 +5,7 @@ import {
 	getArchive,
 	getArchives,
 	updateArchive,
-} from "../controllers/archive";
+} from "../controllers";
 
 const router = Router();
 

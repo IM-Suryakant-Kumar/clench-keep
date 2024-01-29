@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-const errorHandlerMiddleware = (
+export const errorHandlerMiddleware = (
 	err: { statusCode: number; message: string } | any,
 	req: Request,
 	res: Response,
@@ -15,5 +15,3 @@ const errorHandlerMiddleware = (
 		.status(customError.statusCode)
 		.json({ success: false, message: customError.message });
 };
-
-export default errorHandlerMiddleware;

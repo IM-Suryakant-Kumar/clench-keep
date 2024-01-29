@@ -1,5 +1,5 @@
 export const addTokenToLocalStorage = (token: string) => {
-	localStorage.setItem("token", token);
+	localStorage.setItem("token", JSON.stringify(token));
 };
 
 export const removeTokenFromLocalStorage = () => {
@@ -7,5 +7,5 @@ export const removeTokenFromLocalStorage = () => {
 };
 
 export const getTokenFromLocalStorage = () => {
-	return localStorage.getItem("token");
+	return JSON.parse(localStorage.getItem("token") as string);
 };

@@ -1,17 +1,16 @@
+import { axios } from ".";
 import { toast } from "react-toastify";
-import IApiRes from "../types/response";
-import { IUser } from "../types/user";
-import asyncWrapper from "../utils/asyncWrapper";
+import { IApiRes, IUser } from "../types";
 import {
 	addTokenToLocalStorage,
+	asyncWrapper,
 	getTokenFromLocalStorage,
 	removeTokenFromLocalStorage,
-} from "../utils/handleToken";
-import axios from "./axios";
+} from "../utils";
 
 export const register = (user: IUser) =>
 	asyncWrapper(async () => {
-		const { data } = (await axios.post("/auth/resister", user)) as IApiRes;
+		const { data } = (await axios.post("/auth/register", user)) as IApiRes;
 		addTokenToLocalStorage(data.token);
 		toast.success(data.message);
 		return data;

@@ -13,7 +13,6 @@ interface AuthState {
 	errorMessage: string | null;
 	isSubmitting: boolean;
 	isLoading: boolean;
-	isProfileLoading: boolean;
 }
 
 const initialState: AuthState = {
@@ -21,38 +20,37 @@ const initialState: AuthState = {
 	errorMessage: null,
 	isSubmitting: false,
 	isLoading: false,
-	isProfileLoading: false,
 };
 
 export const register = createAsyncThunk(
 	"auth/register",
-	async (cred: IUser, { rejectWithValue }) => {
-		const { success, user, message } = await registerApi(cred);
-		return success ? user : rejectWithValue(message);
+	async (user: IUser, { rejectWithValue }) => {
+		const { success, message } = await registerApi(user);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const login = createAsyncThunk(
 	"auth/login",
-	async (cred: IUser, { rejectWithValue }) => {
-		const { success, user, message } = await loginApi(cred);
-		return success ? user : rejectWithValue(message);
+	async (user: IUser, { rejectWithValue }) => {
+		const { success, message } = await loginApi(user);
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const guestLogin = createAsyncThunk(
 	"auth/guest",
 	async (_, { rejectWithValue }) => {
-		const { success, user, message } = await guestLoginApi();
-		return success ? user : rejectWithValue(message);
+		const { success, message } = await guestLoginApi();
+		return !success && rejectWithValue(message);
 	}
 );
 
 export const logout = createAsyncThunk(
 	"auth/logout",
 	async (_, { rejectWithValue }) => {
-		const { success, user, message } = await logoutApi();
-		return success ? user : rejectWithValue(message);
+		const { success, message } = await logoutApi();
+		return !success && rejectWithValue(message);
 	}
 );
 
@@ -76,7 +74,6 @@ const authSlice = createSlice({
 			.addCase(register.fulfilled, state => {
 				state.isSubmitting = false;
 				state.errorMessage = null;
-				// state.user =
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isSubmitting = false;
@@ -116,15 +113,15 @@ const authSlice = createSlice({
 				state.errorMessage = action.payload as string;
 			})
 			.addCase(getProfile.pending, state => {
-				state.isProfileLoading = true;
+				state.isLoading = true;
 			})
 			.addCase(getProfile.fulfilled, (state, action) => {
-				state.isProfileLoading = false;
+				state.isLoading = false;
 				state.user = action.payload;
 				state.errorMessage = null;
 			})
 			.addCase(getProfile.rejected, state => {
-				state.isProfileLoading = false;
+				state.isLoading = false;
 			});
 	},
 });

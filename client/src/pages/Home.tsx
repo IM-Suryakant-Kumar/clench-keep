@@ -16,7 +16,7 @@ const Home = () => {
 				<p className={styles.title}>
 					A modern way to Keep and handle your notes digitally
 				</p>
-				<Link to="host" className={styles.link}>
+				<Link to="note" className={styles.link}>
 					Get Started
 				</Link>
 			</div>

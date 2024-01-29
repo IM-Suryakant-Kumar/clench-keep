@@ -1,39 +1,32 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styles from "../styles/login.module.css";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../features/hook";
-import { getProfile, login } from "../features/reducers";
+import { getProfile, guestLogin, login } from "../features/reducers";
 import { IUser } from "../types";
-import { guestLogin } from "../apis";
 
 const Login = () => {
 	const state = useLocation().state;
-	const navigate = useNavigate();
-	const { user, errorMessage, isSubmitting, isLoading } = useAppSelector(
+	const { errorMessage, isSubmitting, isLoading } = useAppSelector(
 		state => state.auth
 	);
 	const dispatch = useAppDispatch();
-	const pathname = state?.redirectTo || "/host";
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
-		await dispatch(login({ email, password } as IUser));
+		dispatch(login({ email, password } as IUser));
+		setTimeout(() => dispatch(getProfile()), 1000);
 	};
 
 	const handleGuestLogin = async () => {
-		// await dispatch(guestLogin());
-		const data = await guestLogin();
-		data.success && navigate(pathname, { replace: true });
+		dispatch(guestLogin());
+		setTimeout(() => dispatch(getProfile()), 1000);
 	};
 
-	console.log(user);
-
-	return user ? (
-		<Navigate to={pathname} replace />
-	) : (
+	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
 				<h2 className={styles.title}>Log In</h2>
@@ -68,10 +61,7 @@ const Login = () => {
 					</button>
 					<div className={styles.subtitle}>
 						Don't have an account?{" "}
-						<Link
-							className={styles.link}
-							to="/signup"
-							state={{ redirectTo: pathname }}>
+						<Link className={styles.link} to="/signup">
 							Signup
 						</Link>
 					</div>

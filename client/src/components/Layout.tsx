@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { getProfile } from "../features/reducers";
 
 const Layout = () => {
-	const { user, isProfileLoading } = useAppSelector(state => state.auth);
+	const { user } = useAppSelector(state => state.auth);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -16,17 +16,15 @@ const Layout = () => {
 	}, [dispatch, user]);
 
 	return (
-		!isProfileLoading && (
-			<div>
-				<Outlet />
-				<ToastContainer
-					autoClose={1000}
-					pauseOnFocusLoss={false}
-					theme="colored"
-					transition={Slide}
-				/>
-			</div>
-		)
+		<div>
+			<Outlet />
+			<ToastContainer
+				autoClose={1000}
+				pauseOnFocusLoss={false}
+				theme="colored"
+				transition={Slide}
+			/>
+		</div>
 	);
 };
 

@@ -12,13 +12,13 @@ function App() {
 		createRoutesFromElements(
 			<Route path="/" element={<Layout />}>
 				<Route index element={<Home />} />
-				<Route path="host" element={<HostLayout />}>
-					<Route index element={<h1>Note</h1>} />
+				<Route element={<HostLayout />}>
+					<Route path="note" element={<h1>Note</h1>} />
 					<Route path="archive" element={<h1>Archive</h1>} />
 					<Route path="trash" element={<h1>Trash</h1>} />
 				</Route>
-				<Route path="/login" element={<AuthLayout />}>
-					<Route index element={<Login />} />
+				<Route element={<AuthLayout />}>
+					<Route path="login" element={<Login />} />
 					<Route path="signup" element={<Signup />} />
 				</Route>
 				<Route path="*" element={<NotFound />} />

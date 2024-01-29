@@ -112,17 +112,11 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.errorMessage = action.payload as string;
 			})
-			.addCase(getProfile.pending, state => {
-				// state.isLoading = true;
-			})
 			.addCase(getProfile.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.user = action.payload;
 				state.errorMessage = null;
 			})
-			.addCase(getProfile.rejected, state => {
-				// state.isLoading = false;
-			});
 	},
 });
 

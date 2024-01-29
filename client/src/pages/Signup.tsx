@@ -1,19 +1,11 @@
 import styles from "../styles/signup.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../features/hook";
-import { register } from "../features/reducers";
+import { getProfile, register } from "../features/reducers";
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
 
 const Signup = () => {
-	const state = useLocation().state;
-	const { user, errorMessage, isSubmitting } = useAppSelector(
-		state => state.auth
-	);
+	const { errorMessage, isSubmitting } = useAppSelector(state => state.auth);
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
-	const pathname = state?.redirectTo || "/host";
-	const effectRan = useRef(true);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -22,17 +14,8 @@ const Signup = () => {
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
 		dispatch(register({ name, email, password }));
-		// isNavigate && navigate(pathname, { replace: true });
+		setTimeout(() => dispatch(getProfile), 1000);
 	};
-
-	useEffect(() => {
-		if (effectRan.current) {
-			user && navigate(pathname, { replace: true });
-		}
-		return () => {
-			effectRan.current = false;
-		};
-	}, [navigate, pathname, user]);
 
 	return (
 		<div className={styles.container}>
@@ -69,10 +52,7 @@ const Signup = () => {
 					</button>
 					<div className={styles.subtitle}>
 						Already have an account?{" "}
-						<Link
-							className={styles.link}
-							to="/login"
-							state={{ redirectTo: pathname }}>
+						<Link className={styles.link} to="/login">
 							Login
 						</Link>
 					</div>

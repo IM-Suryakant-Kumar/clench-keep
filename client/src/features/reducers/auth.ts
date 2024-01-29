@@ -113,7 +113,7 @@ const authSlice = createSlice({
 				state.errorMessage = action.payload as string;
 			})
 			.addCase(getProfile.pending, state => {
-				state.isLoading = true;
+				// state.isLoading = true;
 			})
 			.addCase(getProfile.fulfilled, (state, action) => {
 				state.isLoading = false;
@@ -121,7 +121,7 @@ const authSlice = createSlice({
 				state.errorMessage = null;
 			})
 			.addCase(getProfile.rejected, state => {
-				state.isLoading = false;
+				// state.isLoading = false;
 			});
 	},
 });

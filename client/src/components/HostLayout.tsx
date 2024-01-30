@@ -1,12 +1,17 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAppSelector } from "../features/hook";
+import { Navbar } from ".";
+import styles from "../styles/hostlayout.module.css";
 
 const HostLayout = () => {
 	const user = useAppSelector(state => state.auth.user);
 	const pathname = useLocation().pathname;
 
 	return user ? (
-		<Outlet />
+		<div className={styles.container}>
+      <Navbar />
+			<Outlet />
+		</div>
 	) : (
 		<Navigate
 			to="/login"

@@ -8,6 +8,7 @@ import { getProfile } from "../features/reducers";
 const Layout = () => {
 	const { user } = useAppSelector(state => state.auth);
 	const dispatch = useAppDispatch();
+	// Prevent login page render
 	const [showOutlet, setShowOutlet] = useState<boolean>(false);
 	const effectRan = useRef(true);
 

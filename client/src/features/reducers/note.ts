@@ -8,13 +8,13 @@ import {
 } from "../../apis";
 
 interface NoteState {
-	notes: INote[] | null;
+	notes: INote[] | [];
 	errorMessage: string | null;
 	isLoading: boolean;
 }
 
 const initialState: NoteState = {
-	notes: null,
+	notes: [],
 	errorMessage: null,
 	isLoading: false,
 };

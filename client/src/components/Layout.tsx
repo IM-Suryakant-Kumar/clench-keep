@@ -14,8 +14,10 @@ const Layout = () => {
 
 	useEffect(() => {
 		if (effectRan.current) {
-			!user && dispatch(getProfile());
-			setTimeout(() => setShowOutlet(prevState => !prevState), 500);
+			(async () => {
+				await (!user && dispatch(getProfile()));
+				await new Promise(res => res(setShowOutlet(prevState => !prevState)));
+			})();
 		}
 		return () => {
 			effectRan.current = false;

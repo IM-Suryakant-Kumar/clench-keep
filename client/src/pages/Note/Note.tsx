@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../features/hook";
+import { useAppSelector } from "../../features/hook";
 
 const Note = () => {
 	const { notes } = useAppSelector(state => state.note);

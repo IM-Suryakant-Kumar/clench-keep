@@ -1,6 +1,6 @@
-import styles from "../styles/signup.module.css";
-import { useAppDispatch, useAppSelector } from "../features/hook";
-import { getProfile, register } from "../features/reducers";
+import styles from "./auth.module.css";
+import { useAppDispatch, useAppSelector } from "../../features/hook";
+import { getProfile, register } from "../../features/reducers";
 import { Link } from "react-router-dom";
 
 const Signup = () => {

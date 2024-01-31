@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
-import styles from "../styles/login.module.css";
+import styles from "./auth.module.css";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../features/hook";
-import { getProfile, guestLogin, login } from "../features/reducers";
-import { IUser } from "../types";
+import { useAppDispatch, useAppSelector } from "../../features/hook";
+import { getProfile, guestLogin, login } from "../../features/reducers";
+import { IUser } from "../../types";
 
 const Login = () => {
 	const state = useLocation().state;

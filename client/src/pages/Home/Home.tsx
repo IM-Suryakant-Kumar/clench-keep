@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Notebook from "../assets/notebook.svg";
-import styles from "../styles/home.module.css";
+import Notebook from "../../assets/notebook.svg";
+import styles from "./home.module.css";
 import { GiPencil } from "react-icons/gi";
 
 const Home = () => {

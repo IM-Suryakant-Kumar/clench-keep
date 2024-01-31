@@ -1,11 +1,20 @@
 import { IUser, Response } from "../../types";
-import api from "../apis";
+import api from "../api";
 
 const auth = api.injectEndpoints({
 	endpoints: build => ({
 		getProfile: build.query<Response, null>({
 			query: () => "/auth/me",
-			providesTags: [{ type: "auth", id: "LIST" }],
+			providesTags: result =>
+				result ? [{ type: "auth", _id: result.user._id }] : ["auth"],
+		}),
+		register: build.mutation<Response, IUser>({
+			query: user => ({
+				url: "/auth/register",
+				method: "POST",
+				body: user,
+			}),
+			invalidatesTags: ["auth"],
 		}),
 		login: build.mutation<Response, IUser>({
 			query: (user: IUser) => ({
@@ -13,14 +22,24 @@ const auth = api.injectEndpoints({
 				method: "POST",
 				body: user,
 			}),
-			invalidatesTags: [{ type: "auth", id: "LIST" }],
+			invalidatesTags: ["auth"],
 		}),
 		guestLogin: build.mutation<Response, null>({
 			query: () => "/auth/login",
-			invalidatesTags: [{ type: "auth", id: "LIST" }],
+			invalidatesTags: ["auth"],
+		}),
+		logout: build.mutation<Response, null>({
+			query: () => "/auth/logout",
+			invalidatesTags: ["auth"],
 		}),
 	}),
 	overrideExisting: false,
 });
 
-export const { useGetProfileQuery, useLazyGetProfileQuery } = auth;
+export const {
+	useGetProfileQuery,
+	useRegisterMutation,
+	useLoginMutation,
+	useGuestLoginMutation,
+	useLogoutMutation,
+} = auth;

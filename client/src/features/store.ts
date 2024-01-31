@@ -6,7 +6,7 @@ import {
 	trashReducer,
 } from "./reducers";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import api from "./apis";
+import api from "./api";
 
 const store = configureStore({
 	reducer: {

@@ -3,10 +3,8 @@ import { Navbar } from "..";
 import { useGetProfileQuery } from "../../features/apis";
 
 const HostLayout = () => {
-	const { data, isLoading, isError } = useGetProfileQuery(null);
+	const { isLoading, isError } = useGetProfileQuery(null);
 	const pathname = useLocation().pathname;
-
-  // console.log()
 
 	return isLoading ? (
 		<h3>Loading...</h3>

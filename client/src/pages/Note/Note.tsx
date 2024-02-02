@@ -1,9 +1,9 @@
-import { useAppSelector } from "../../features/hook";
+import { useGetNotesQuery } from "../../features/apis";
+
 
 const Note = () => {
-	const { notes } = useAppSelector(state => state.note);
-
-	console.log(notes);
+	const { data } = useGetNotesQuery();
+	console.log(data?.notes);
 
 	return <div>Note</div>;
 };

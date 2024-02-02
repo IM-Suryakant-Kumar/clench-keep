@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { toast } from "react-toastify";
 import { ErrorResponse, INote, Response } from "../../types";
 import { getTokenFromLocalStorage } from "../../utils";
@@ -13,15 +12,7 @@ const note = api.injectEndpoints({
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
 			providesTags: result =>
-				result
-					? [
-							...result.notes.map(({ _id }) => ({
-								type: "note" as const,
-								id: _id,
-							})),
-							{ type: "note", id: "LIST" },
-					  ]
-					: [{ type: "note", id: "LIST" }],
+				result ? [{ type: "note", id: "LIST" }] : ["note"],
 		}),
 		createNote: build.mutation<Response, INote>({
 			query: body => ({
@@ -37,7 +28,7 @@ const note = api.injectEndpoints({
 					const errorMessage = (error as ErrorResponse).data.message;
 					toast.error(errorMessage);
 				}
-				return [{ type: "note", id: "LIST" }];
+				return result ? ["note"] : [{ type: "note", id: "ERROR" }];
 			},
 		}),
 		updateNote: build.mutation<Response, INote>({
@@ -47,14 +38,16 @@ const note = api.injectEndpoints({
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
-			invalidatesTags: (result, error, arg) => {
+			invalidatesTags: (result, error) => {
 				if (result) {
 					toast.success(result.message);
 				} else {
 					const errorMessage = (error as ErrorResponse).data.message;
 					toast.error(errorMessage);
 				}
-				return [{ type: "note", id: arg._id }];
+				return result
+					? [{ type: "note", id: "LIST" }]
+					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
 		deleteNote: build.mutation<Response, INote>({
@@ -63,14 +56,16 @@ const note = api.injectEndpoints({
 				method: "DELETE",
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
-			invalidatesTags: (result, error, arg) => {
+			invalidatesTags: (result, error) => {
 				if (result) {
 					toast.success(result.message);
 				} else {
 					const errorMessage = (error as ErrorResponse).data.message;
 					toast.error(errorMessage);
 				}
-				return [{ type: "note", id: arg._id }];
+				return result
+					? [{ type: "note", id: "LIST" }]
+					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
 	}),

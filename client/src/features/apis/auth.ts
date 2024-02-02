@@ -45,7 +45,7 @@ const auth = api.injectEndpoints({
 					addTokenToLocalStorage(result.token);
 					toast.success(result.message);
 				}
-				return result ? ["auth"] : [{ type: "auth", id: "LIST" }];
+				return result ? ["auth"] : [{ type: "auth", id: "ERROR" }];
 			},
 		}),
 		guestLogin: build.mutation<Response, void>({
@@ -55,7 +55,7 @@ const auth = api.injectEndpoints({
 					addTokenToLocalStorage(result.token);
 					toast.success(result.message);
 				}
-				return result ? ["auth"] : [{ type: "auth", id: "LIST" }];
+				return result ? ["auth"] : [{ type: "auth", id: "ERROR" }];
 			},
 		}),
 		logout: build.mutation<Response, void>({
@@ -71,7 +71,7 @@ const auth = api.injectEndpoints({
 					removeTokenFromLocalStorage();
 					toast.success(result.message);
 				}
-				return result ?  [{ type: "auth", id: "LIST" }] : ["auth"];
+				return result ?  [{ type: "auth", id: "LIST" }] : [{ type: "auth", id: "ERROR" }];
 			},
 		}),
 	}),

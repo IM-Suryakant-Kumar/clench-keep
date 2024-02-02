@@ -13,6 +13,10 @@ export interface Response {
 	trash: ITrash;
 }
 
+export interface ErrorResponse {
+	data: { success: boolean; message: string };
+}
+
 interface SuccessRes {
 	data: Response;
 }

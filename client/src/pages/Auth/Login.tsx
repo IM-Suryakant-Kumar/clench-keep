@@ -1,29 +1,26 @@
 import { useLocation } from "react-router-dom";
-import styles from "../styles/login.module.css";
+import styles from "./auth.module.css";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../features/hook";
-import { getProfile, guestLogin, login } from "../features/reducers";
-import { IUser } from "../types";
+import { ErrorResponse, IUser } from "../../types";
+import { useGuestLoginMutation, useLoginMutation } from "../../features/apis";
 
 const Login = () => {
 	const state = useLocation().state;
-	const { errorMessage, isSubmitting, isLoading } = useAppSelector(
-		state => state.auth
-	);
-	const dispatch = useAppDispatch();
+	const [login, { isLoading: isLoginLoading, error: loginError }] =
+		useLoginMutation();
+	const [guestLogin, { isLoading: isGuestLoading, error: guestLoginError }] =
+		useGuestLoginMutation();
+
+	// Extract errorMessage
+	const error = loginError || guestLoginError;
+	const errorMessage = (error as ErrorResponse)?.data.message;
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
-		dispatch(login({ email, password } as IUser));
-		setTimeout(() => dispatch(getProfile()), 1000);
-	};
-
-	const handleGuestLogin = async () => {
-		dispatch(guestLogin());
-		setTimeout(() => dispatch(getProfile()), 500);
+		login({ email, password } as IUser);
 	};
 
 	return (
@@ -49,15 +46,15 @@ const Login = () => {
 						minLength={4}
 						required
 					/>
-					<button className={styles.lgbtn} disabled={isSubmitting}>
-						{isSubmitting ? "Loggin in..." : "login"}
+					<button className={styles.lgbtn} disabled={isLoginLoading}>
+						{isLoginLoading ? "Loggin in..." : "login"}
 					</button>
 					<button
 						type="button"
 						className={styles.glgbtn}
-						onClick={handleGuestLogin}
-						disabled={isLoading}>
-						{isLoading ? "Guest Logging in..." : "Guest Login"}
+						onClick={() => guestLogin()}
+						disabled={isGuestLoading}>
+						{isGuestLoading ? "Guest Logging in..." : "Guest Login"}
 					</button>
 					<div className={styles.subtitle}>
 						Don't have an account?{" "}

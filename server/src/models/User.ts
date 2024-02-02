@@ -10,7 +10,11 @@ const UserSchema = new Schema<IUser>(
 			minlength: [3, "name should not be less than 3 characters"],
 			required: [true, "Please provide name"],
 		},
-		email: { type: String, required: [true, "Please provide email"] },
+		email: {
+			type: String,
+			required: [true, "Please provide email"],
+			unique: true,
+		},
 		password: {
 			type: String,
 			minlength: [4, "password should not be less than 4 chracters"],

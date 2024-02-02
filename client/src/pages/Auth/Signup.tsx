@@ -1,11 +1,11 @@
-import styles from "../styles/signup.module.css";
-import { useAppDispatch, useAppSelector } from "../features/hook";
-import { getProfile, register } from "../features/reducers";
+import styles from "./auth.module.css";
 import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../../features/apis";
+import { ErrorResponse, IUser } from "../../types";
 
 const Signup = () => {
-	const { errorMessage, isSubmitting } = useAppSelector(state => state.auth);
-	const dispatch = useAppDispatch();
+	const [register, { isLoading, error }] = useRegisterMutation();
+	const errorMessage = (error as ErrorResponse)?.data.message;
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -13,8 +13,7 @@ const Signup = () => {
 		const name = formData.get("name") as string;
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
-		dispatch(register({ name, email, password }));
-		setTimeout(() => dispatch(getProfile), 500);
+		register({ name, email, password } as IUser);
 	};
 
 	return (
@@ -47,8 +46,8 @@ const Signup = () => {
 						minLength={4}
 						required
 					/>
-					<button className={styles.lgbtn} disabled={isSubmitting}>
-						{isSubmitting ? "signing up..." : "Signup"}
+					<button className={styles.lgbtn} disabled={isLoading}>
+						{isLoading ? "signing up..." : "Signup"}
 					</button>
 					<div className={styles.subtitle}>
 						Already have an account?{" "}

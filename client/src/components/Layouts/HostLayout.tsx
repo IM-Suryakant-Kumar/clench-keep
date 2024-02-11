@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { Navbar } from "..";
+import { Navbar, Sidebar } from "..";
 import { useGetProfileQuery } from "../../features/apis";
 
 const HostLayout = () => {

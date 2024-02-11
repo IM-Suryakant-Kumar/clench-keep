@@ -127,4 +127,12 @@
 	.container {
 		height: 4.5rem;
 	}
+
+	.logoIcon {
+		font-size: 1.8rem;
+	}
+
+	.logoTitle {
+		font-size: x-large;
+	}
 }

@@ -1,0 +1,33 @@
+.emptyCont {
+	height: calc(100vh - 3.5rem - 3.5rem);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.emptyDesc {
+	text-align: center;
+	font-size: large;
+	color: #333;
+	margin: 0 0.2em;
+}
+
+.emptyBtn {
+	width: 8rem;
+	height: 2.2rem;
+	border: none;
+	outline: none;
+	background-color: var(--logo-cl);
+	color: var(--primary-cl);
+	margin-top: 1em;
+	border-radius: 0.5em;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+	.emptyCont {
+		height: calc(100vh - 4.5rem);
+	}
+}

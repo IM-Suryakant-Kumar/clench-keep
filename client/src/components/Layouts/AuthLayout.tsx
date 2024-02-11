@@ -6,8 +6,6 @@ const AuthLayout = () => {
 	const state = useLocation().state;
 	const pathname = state?.redirectTo || "/note";
 
-
-  // return data?.user ?  <Navigate to={pathname} replace /> : <Outlet />
 	return isFetching ? (
 		<h3>Loading...</h3>
 	) : isError ? (

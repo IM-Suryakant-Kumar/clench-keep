@@ -24,3 +24,27 @@ body {
 a {
 	text-decoration: none;
 }
+
+a.active {
+	border: 1px solid var(--logo-cl);
+}
+
+.hostLayout {
+	padding: 3.5em 0.5em;
+}
+
+@media screen and (min-width: 768px) {
+	a.active {
+		border: none;
+		background-color: var(--logo-cl);
+		color: var(--primary-cl);
+	}
+
+	.hostLayout {
+		padding: 4.5em 0.5em;
+	}
+
+	.hostLayout {
+		padding-left: 12em;
+	}
+}

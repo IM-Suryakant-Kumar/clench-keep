@@ -17,7 +17,10 @@ const HostLayout = () => {
 	) : (
 		<div>
 			<Navbar />
-			<Outlet />
+			<div className="hostLayout">
+				<Outlet />
+			</div>
+      <Sidebar />
 		</div>
 	);
 };

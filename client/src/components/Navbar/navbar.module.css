@@ -4,21 +4,119 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 0.5em;
+	gap: 0.5em;
+	padding: 0 0.2em;
 }
 
-.logo_cont {
+.logoCont {
+	display: flex;
+	align-items: center;
 }
 
-.title {
+.logoIcon {
+	font-size: 1.4rem;
+	color: var(--logo-cl);
+}
+
+.logoTitle {
 	font-family: "Cinzel", serif;
 	color: var(--logo-cl);
-	font-size: medium;
-  font-weight: 600;
+	font-size: large;
+	font-weight: 600;
 }
 
-.search_bar {
+.actionCont {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.5em;
 }
 
-.logout_cont {
+.searchBar {
+	height: 1.5rem;
+	background-color: var(--primary-cl);
+	display: flex;
+	border-radius: 0.2em;
+}
+
+.searchInput {
+	width: calc(100% - 1.5rem);
+	outline: none;
+	border: none;
+	background-color: var(--primary-cl);
+	padding: 0.4em 0 0.4em 1em;
+}
+
+.searchBtn {
+	width: 1.5rem;
+	background-color: var(--logo-cl);
+	color: var(--primary-cl);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0 0.2em 0.2em 0;
+	cursor: pointer;
+}
+
+.searchIcon {
+	font-size: 1rem;
+	color: var(--primary-cl);
+}
+
+.logoutCont {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.logoutIcon {
+	color: var(--logo-cl);
+	font-size: 1.6rem;
+}
+
+@media screen and (min-width: 600px) {
+	.container {
+		padding: 0 1em;
+	}
+
+	.logoCont {
+		width: 30%;
+	}
+
+	.logoIcon {
+		font-size: 1.5rem;
+	}
+
+	.logoTitle {
+		font-size: larger;
+	}
+
+	.actionCont {
+		width: 70%;
+		justify-content: space-between;
+	}
+
+	.searchBar {
+		height: 1.8rem;
+		width: 50vw;
+		max-width: 600px;
+	}
+
+	.searchInput {
+		width: calc(100% - 2rem);
+		padding: 0.8em;
+	}
+
+	.searchBtn {
+		width: 2rem;
+	}
+
+	.searchIcon {
+		font-size: 1.2rem;
+	}
+
+	.logoutIcon {
+		font-size: 2rem;
+		font-weight: 600;
+	}
 }

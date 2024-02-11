@@ -1,13 +1,33 @@
 import styles from "./navbar.module.css";
+import { TfiPencilAlt2 } from "react-icons/tfi";
+import { MdOutlineLogout, MdSearch } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { useLogoutMutation } from "../../features/apis";
 
 const Navbar = () => {
+	const [logout] = useLogoutMutation();
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.logo_cont}>
-        <h3 className={styles.title}>ClenchKeep</h3>
-      </div>
-			<div className={styles.search_bar}>SearchBar</div>
-			<div className={styles.logout_cont}>Logout</div>
+			<Link to="/" className={styles.logoCont}>
+				<TfiPencilAlt2 className={styles.logoIcon} />
+				<h3 className={styles.logoTitle}>ClenchKeep</h3>
+			</Link>
+			<div className={styles.actionCont}>
+				<form className={styles.searchBar}>
+					<input
+						type="text"
+						className={styles.searchInput}
+						placeholder="Search..."
+					/>
+					<div className={styles.searchBtn}>
+						<MdSearch className={styles.searchIcon} />
+					</div>
+				</form>
+				<div className={styles.logoutCont} onClick={() => logout()}>
+					<MdOutlineLogout className={styles.logoutIcon} />
+				</div>
+			</div>
 		</div>
 	);
 };

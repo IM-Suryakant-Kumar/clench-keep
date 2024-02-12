@@ -2,11 +2,11 @@ import styles from "./note.module.css";
 import { useGetNotesQuery } from "../../features/apis";
 import { INote } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
-import { toggleModal } from "../../features/reducers";
-import { Modal } from "../../components";
+import { toggleCreateModal } from "../../features/reducers";
+import { CreateModal } from "../../components";
 
 const Note = () => {
-	const showModal = useAppSelector(state => state.modal.showModal);
+	const showCreateModal = useAppSelector(state => state.modal.showCreateModal);
 	const dispatch = useAppDispatch();
 	const { data } = useGetNotesQuery();
 	const notes = data?.notes as INote[];
@@ -20,12 +20,12 @@ const Note = () => {
 					</p>
 					<button
 						className={styles.emptyBtn}
-						onClick={() => dispatch(toggleModal())}>
+						onClick={() => dispatch(toggleCreateModal())}>
 						CREATE NOTE
 					</button>
 				</div>
 			)}
-			{showModal && <Modal />}
+			{showCreateModal && <CreateModal />}
 		</div>
 	);
 };

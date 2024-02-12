@@ -49,7 +49,7 @@ const Editor: React.FC<Props> = ({ content, setContent }) => {
 			modules={modules}
 			formats={formats}
 			onChange={setContent}
-			placeholder="Add brief..."
+			placeholder="Add brief about note..."
 		/>
 	);
 };

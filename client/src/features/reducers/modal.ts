@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface modalState {
-	showModal: boolean;
+	showCreateModal: boolean;
 }
 
 const initialState: modalState = {
-	showModal: false,
+	showCreateModal: false,
 };
 
 const modalSlice = createSlice({
 	name: "modal",
 	initialState,
 	reducers: {
-		toggleModal: state => {
-			state.showModal = !state.showModal;
+		toggleCreateModal: state => {
+			state.showCreateModal = !state.showCreateModal;
 		}
 	},
 });
 
-export const { toggleModal } = modalSlice.actions;
+export const { toggleCreateModal } = modalSlice.actions;
 export default modalSlice.reducer;

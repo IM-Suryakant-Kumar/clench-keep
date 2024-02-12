@@ -2,6 +2,7 @@ import { MdClose } from "react-icons/md";
 import { useAppDispatch } from "../../features/hook";
 import styles from "./modal.module.css";
 import { toggleModal } from "../../features/reducers";
+import { Editor } from "..";
 
 const Modal = () => {
 	const dispatch = useAppDispatch();
@@ -13,13 +14,20 @@ const Modal = () => {
 					className={styles.closeBtn}
 					onClick={() => dispatch(toggleModal())}
 				/>
-				<textarea
-					className={styles.titleText}
-					placeholder="Add title"></textarea>
-				<div className={styles.actionContainer}></div>
-				<textarea
-					className={styles.briefText}
-					placeholder="Add brief about notes"></textarea>
+				<Editor />
+				{/* <form>
+					<textarea
+						name="title"
+						className={styles.title}
+						placeholder="Add title"
+					/>
+					<div className={styles.actionContainer}></div>
+					<textarea
+						name="content"
+						className={styles.content}
+						placeholder="Add brief about notes"
+					/>
+				</form> */}
 			</div>
 		</div>
 	);

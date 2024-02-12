@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import api from "./api";
+import { modalReducer } from "./reducers";
 
 const store = configureStore({
 	reducer: {
+    modal: modalReducer,
 		[api.reducerPath]: api.reducer,
 	},
 

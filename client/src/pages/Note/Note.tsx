@@ -2,11 +2,14 @@ import styles from "./note.module.css";
 import { useGetNotesQuery } from "../../features/apis";
 import { INote } from "../../types";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../features/hook";
+import { toggleModal } from "../../features/reducers";
 
 const Note = () => {
+	const showModal = useAppSelector(state => state.modal.showModal);
+	const dispatch = useAppDispatch();
 	const { data } = useGetNotesQuery();
 	const notes = data?.notes as INote[];
-	const [showModal, setShowModal] = useState<boolean>(false);
 
 	return (
 		<div>
@@ -15,10 +18,14 @@ const Note = () => {
 					<p className={styles.emptyDesc}>
 						You don't have any note yet. Create one
 					</p>
-					<button className={styles.emptyBtn}>CREATE NOTE</button>
+					<button
+						className={styles.emptyBtn}
+						onClick={() => dispatch(toggleModal())}>
+						CREATE NOTE
+					</button>
 				</div>
 			)}
-      {showModal && }
+			{showModal && <div>Modal</div>}
 		</div>
 	);
 };

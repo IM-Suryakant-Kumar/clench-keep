@@ -1,9 +1,9 @@
 import styles from "./note.module.css";
 import { useGetNotesQuery } from "../../features/apis";
 import { INote } from "../../types";
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
 import { toggleModal } from "../../features/reducers";
+import { Modal } from "../../components";
 
 const Note = () => {
 	const showModal = useAppSelector(state => state.modal.showModal);
@@ -25,7 +25,7 @@ const Note = () => {
 					</button>
 				</div>
 			)}
-			{showModal && <div>Modal</div>}
+			{showModal && <Modal />}
 		</div>
 	);
 };

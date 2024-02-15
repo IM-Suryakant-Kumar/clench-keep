@@ -4,5 +4,6 @@ export interface INote {
 	content: string;
 	background: string;
 	labels: string[];
-	createdAt: Date;
+	createdAt: string;
+  updatedAt: string;
 }

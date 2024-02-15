@@ -29,7 +29,11 @@ const Note = () => {
 				</div>
 			)}
 			{showCreateModal && <CreateModal />}
-			{notes?.map(note => <NoteCard key={note._id} note={note} />)}
+			<div className={styles.cards}>
+				{notes?.map(note => (
+					<NoteCard key={note._id} note={note} type="note" />
+				))}
+			</div>
 			<button
 				className={styles.modalBtn}
 				onClick={() => dispatch(toggleCreateModal())}>

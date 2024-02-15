@@ -14,7 +14,6 @@
 .wrapper {
 	width: 90%;
 	max-width: 400px;
-	/* height: 50%; */
 	background: var(--primary-cl);
 	border-radius: 0.1em;
 	position: relative;

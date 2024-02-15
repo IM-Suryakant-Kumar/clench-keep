@@ -26,6 +26,10 @@
 	cursor: pointer;
 }
 
+.cards {
+	margin: 1em auto;
+}
+
 .modalBtn {
 	border: none;
 	width: 3rem;

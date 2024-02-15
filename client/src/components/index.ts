@@ -1,8 +1,8 @@
-export { default as Layout } from "./layouts/Layout";
-export { default as HostLayout } from "./layouts/HostLayout";
-export { default as AuthLayout } from "./layouts/AuthLayout";
-export { default as Navbar } from "./navbar/Navbar";
-export { default as Sidebar } from "./sidebar/Sidebar";
-export { default as CreateModal } from "./modal/CreateModal";
-export { default as Editor } from "./editor/Editor";
-export { default as NoteCard } from "./noteCard/NoteCard";
+export { default as Layout } from "./Layouts/Layout";
+export { default as HostLayout } from "./Layouts/HostLayout";
+export { default as AuthLayout } from "./Layouts/AuthLayout";
+export { default as Navbar } from "./Navbar/Navbar";
+export { default as Sidebar } from "./Sidebar/Sidebar";
+export { default as CreateModal } from "./Modal/CreateModal";
+export { default as Editor } from "./Editor/Editor";
+export { default as NoteCard } from "./NoteCard/NoteCard";

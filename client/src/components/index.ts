@@ -5,3 +5,4 @@ export { default as Navbar } from "./navbar/Navbar";
 export { default as Sidebar } from "./sidebar/Sidebar";
 export { default as CreateModal } from "./modal/CreateModal";
 export { default as Editor } from "./editor/Editor";
+export { default as NoteCard } from "./noteCard/NoteCard";

@@ -20,7 +20,7 @@ export interface INote extends Document {
   userId: string;
 	title: string;
 	content: string;
-	backgound: string;
+	background: string;
 	labels: string[];
 }
 

@@ -1,9 +1,8 @@
 export interface INote {
   _id: string;
-	userId: string;
 	title: string;
 	content: string;
-	backgound: string;
+	background: string;
 	labels: string[];
 	createdAt: Date;
 }

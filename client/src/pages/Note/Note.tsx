@@ -30,7 +30,7 @@ const Note = () => {
 			)}
 			{showCreateModal && <CreateModal />}
 			<div className={styles.cards}>
-				{notes?.map(note => (
+				{notes?.filter(note => !note.isArchived || !note.isTrashed).map(note => (
 					<NoteCard key={note._id} note={note} type="note" />
 				))}
 			</div>

@@ -12,8 +12,6 @@ const Note = () => {
 	const { data } = useGetNotesQuery();
 	const notes = data?.notes as INote[];
 
-	console.log("notes", JSON.stringify(notes, null, 2));
-
 	return (
 		<div>
 			{notes?.length === 0 && (

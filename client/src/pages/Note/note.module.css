@@ -28,6 +28,9 @@
 
 .cards {
 	margin: 1em auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	gap: 1em;
 }
 
 .modalBtn {
@@ -60,5 +63,9 @@
 
 	.btnIcon {
 		font-size: 2rem;
+	}
+
+	.cards {
+		margin: 1em;
 	}
 }

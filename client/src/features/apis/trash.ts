@@ -5,7 +5,7 @@ import api from "../api";
 
 const trash = api.injectEndpoints({
 	endpoints: build => ({
-		createTrash: build.mutation<SuccessResponse, INote>({
+		AddToTrash: build.mutation<SuccessResponse, INote>({
 			query: body => ({
 				url: `/trash/create/${body._id}`,
 				method: "PATCH",
@@ -24,7 +24,7 @@ const trash = api.injectEndpoints({
 					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
-		restoreTrash: build.mutation<SuccessResponse, INote>({
+		restoreFromTrash: build.mutation<SuccessResponse, INote>({
 			query: body => ({
 				url: `/trash/delete/${body._id}`,
 				method: "PATCH",
@@ -45,7 +45,4 @@ const trash = api.injectEndpoints({
 	}),
 });
 
-export const {
-	useCreateTrashMutation,
-	useRestoreTrashMutation,
-} = trash;
+export const { useAddToTrashMutation, useRestoreFromTrashMutation } = trash;

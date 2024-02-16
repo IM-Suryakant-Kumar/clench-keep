@@ -5,9 +5,9 @@ import api from "../api";
 
 const archive = api.injectEndpoints({
 	endpoints: build => ({
-		createArchive: build.mutation<SuccessResponse, INote>({
+		addToArchive: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: `/archive/create/${body._id}`,
+				url: `/add/create/${body._id}`,
 				method: "PATCH",
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
@@ -24,9 +24,9 @@ const archive = api.injectEndpoints({
 					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
-		restoreArchive: build.mutation<SuccessResponse, INote>({
+		restoreFromArchive: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: `/archive/delete/${body._id}`,
+				url: `/archive/restore/${body._id}`,
 				method: "PATCH",
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
@@ -45,4 +45,5 @@ const archive = api.injectEndpoints({
 	}),
 });
 
-export const { useCreateArchiveMutation, useRestoreArchiveMutation } = archive;
+export const { useAddToArchiveMutation, useRestoreFromArchiveMutation } =
+	archive;

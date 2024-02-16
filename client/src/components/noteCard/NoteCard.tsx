@@ -6,11 +6,11 @@ import { MdDeleteForever, MdRestore } from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoArchiveOutline } from "react-icons/io5";
 import {
-	useCreateArchiveMutation,
-	useCreateTrashMutation,
+  useAddToArchiveMutation,
+	useAddToTrashMutation,
 	useDeleteNoteMutation,
-	useRestoreArchiveMutation,
-	useRestoreTrashMutation,
+  useRestoreFromArchiveMutation,
+  useRestoreFromTrashMutation,
 } from "../../features/apis";
 import { UpdateModal } from "..";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
@@ -32,14 +32,14 @@ const NoteCard: React.FC<Props> = ({
 
 	const [deleteNote, { isLoading: deleteNoteLoading }] =
 		useDeleteNoteMutation();
-	const [createArchive, { isLoading: createArchiveLoading }] =
-		useCreateArchiveMutation();
-	const [restoreArchive, { isLoading: restoreArchiveLoading }] =
-		useRestoreArchiveMutation();
-	const [createTrash, { isLoading: createTrashLoading }] =
-		useCreateTrashMutation();
-	const [restoreTrash, { isLoading: restoreTrashLoading }] =
-		useRestoreTrashMutation();
+	const [addToArchive, { isLoading: addToArchiveLoading }] =
+		useAddToArchiveMutation();
+    const [addToTrash, { isLoading: addToTrashLoading }] =
+      useAddToTrashMutation();
+	const [restoreFromArchive, { isLoading: restoreFromArchiveLoading }] =
+		useRestoreFromArchiveMutation();
+	const [restoreFromTrash, { isLoading: restoreFromTrashLoading }] =
+		useRestoreFromTrashMutation();
 
 	return (
 		<div className={styles.container} style={{ background }}>
@@ -73,24 +73,24 @@ const NoteCard: React.FC<Props> = ({
 						/>
 						<IoArchiveOutline
 							className={styles.actionIcon}
-							aria-disabled={createArchiveLoading}
-							onClick={() => createArchive({ _id } as INote)}
+							aria-disabled={addToArchiveLoading}
+							onClick={() => addToArchive({ _id } as INote)}
 						/>
 						<FaRegTrashCan
 							className={styles.actionIcon}
-							aria-disabled={createTrashLoading}
-							onClick={() => createTrash({ _id } as INote)}
+							aria-disabled={addToTrashLoading}
+							onClick={() => addToTrash({ _id } as INote)}
 						/>
 					</div>
 				) : (
 					<div className={styles.actions}>
 						<MdRestore
 							className={styles.actionIcon}
-							aria-disabled={restoreArchiveLoading || restoreTrashLoading}
+							aria-disabled={restoreFromArchiveLoading || restoreFromTrashLoading}
 							onClick={() =>
 								type === "archive"
-									? restoreArchive({ _id } as INote)
-									: restoreTrash({ _id } as INote)
+									? restoreFromArchive({ _id } as INote)
+									: restoreFromTrash({ _id } as INote)
 							}
 						/>
 						<MdDeleteForever

@@ -24,7 +24,7 @@ const trash = api.injectEndpoints({
 					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
-		deleteTrash: build.mutation<SuccessResponse, INote>({
+		restoreTrash: build.mutation<SuccessResponse, INote>({
 			query: body => ({
 				url: `/trash/delete/${body._id}`,
 				method: "PATCH",
@@ -47,5 +47,5 @@ const trash = api.injectEndpoints({
 
 export const {
 	useCreateTrashMutation,
-	useDeleteTrashMutation,
+	useRestoreTrashMutation,
 } = trash;

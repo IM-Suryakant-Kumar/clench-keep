@@ -24,7 +24,7 @@ const archive = api.injectEndpoints({
 					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
-		deleteArchive: build.mutation<SuccessResponse, INote>({
+		restoreArchive: build.mutation<SuccessResponse, INote>({
 			query: body => ({
 				url: `/archive/delete/${body._id}`,
 				method: "PATCH",
@@ -45,4 +45,4 @@ const archive = api.injectEndpoints({
 	}),
 });
 
-export const { useCreateArchiveMutation, useDeleteArchiveMutation } = archive;
+export const { useCreateArchiveMutation, useRestoreArchiveMutation } = archive;

@@ -8,9 +8,9 @@ import { IoArchiveOutline } from "react-icons/io5";
 import {
 	useCreateArchiveMutation,
 	useCreateTrashMutation,
-	useDeleteArchiveMutation,
 	useDeleteNoteMutation,
-	useDeleteTrashMutation,
+	useRestoreArchiveMutation,
+	useRestoreTrashMutation,
 } from "../../features/apis";
 import { UpdateModal } from "..";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
@@ -34,12 +34,12 @@ const NoteCard: React.FC<Props> = ({
 		useDeleteNoteMutation();
 	const [createArchive, { isLoading: createArchiveLoading }] =
 		useCreateArchiveMutation();
-	const [deleteArchive, { isLoading: deleteArchiveLoading }] =
-		useDeleteArchiveMutation();
+	const [restoreArchive, { isLoading: restoreArchiveLoading }] =
+		useRestoreArchiveMutation();
 	const [createTrash, { isLoading: createTrashLoading }] =
 		useCreateTrashMutation();
-	const [deleteTrash, { isLoading: deleteTrashLoading }] =
-		useDeleteTrashMutation();
+	const [restoreTrash, { isLoading: restoreTrashLoading }] =
+		useRestoreTrashMutation();
 
 	return (
 		<div className={styles.container} style={{ background }}>
@@ -86,11 +86,11 @@ const NoteCard: React.FC<Props> = ({
 					<div className={styles.actions}>
 						<MdRestore
 							className={styles.actionIcon}
-							aria-disabled={deleteArchiveLoading || deleteTrashLoading}
+							aria-disabled={restoreArchiveLoading || restoreTrashLoading}
 							onClick={() =>
 								type === "archive"
-									? deleteArchive({ _id } as INote)
-									: deleteTrash({ _id } as INote)
+									? restoreArchive({ _id } as INote)
+									: restoreTrash({ _id } as INote)
 							}
 						/>
 						<MdDeleteForever

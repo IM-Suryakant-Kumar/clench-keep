@@ -1,5 +1,4 @@
-import { toast } from "react-toastify";
-import { ErrorResponse, INote, Response } from "../../types";
+import { INote, Response } from "../../types";
 import { getTokenFromLocalStorage } from "../../utils";
 import api from "../api";
 
@@ -21,15 +20,8 @@ const note = api.injectEndpoints({
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
-			invalidatesTags: (result, error) => {
-				if (result) {
-					toast.success(result.message);
-				} else {
-					const errorMessage = (error as ErrorResponse).data.message;
-					toast.error(errorMessage);
-				}
-				return result ? ["note"] : [{ type: "note", id: "ERROR" }];
-			},
+			invalidatesTags: result =>
+				result ? ["note"] : [{ type: "note", id: "ERROR" }],
 		}),
 		updateNote: build.mutation<Response, INote>({
 			query: body => ({
@@ -38,17 +30,10 @@ const note = api.injectEndpoints({
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
-			invalidatesTags: (result, error) => {
-				if (result) {
-					toast.success(result.message);
-				} else {
-					const errorMessage = (error as ErrorResponse).data.message;
-					toast.error(errorMessage);
-				}
-				return result
+			invalidatesTags: result =>
+				result
 					? [{ type: "note", id: "LIST" }]
-					: [{ type: "note", id: "ERROR" }];
-			},
+					: [{ type: "note", id: "ERROR" }],
 		}),
 		deleteNote: build.mutation<Response, INote>({
 			query: ({ _id }) => ({
@@ -56,17 +41,10 @@ const note = api.injectEndpoints({
 				method: "DELETE",
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
-			invalidatesTags: (result, error) => {
-				if (result) {
-					toast.success(result.message);
-				} else {
-					const errorMessage = (error as ErrorResponse).data.message;
-					toast.error(errorMessage);
-				}
-				return result
+			invalidatesTags: result =>
+				result
 					? [{ type: "note", id: "LIST" }]
-					: [{ type: "note", id: "ERROR" }];
-			},
+					: [{ type: "note", id: "ERROR" }],
 		}),
 	}),
 });

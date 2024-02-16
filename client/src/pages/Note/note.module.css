@@ -36,8 +36,9 @@
 	height: 3rem;
 	background: var(--logo-cl);
 	border-radius: 50%;
+	cursor: pointer;
 	position: fixed;
-	bottom: 5rem;
+	bottom: 8rem;
 	right: 1rem;
 }
 

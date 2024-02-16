@@ -1,18 +1,29 @@
 import { MdClose } from "react-icons/md";
 import { useAppDispatch } from "../../features/hook";
 import styles from "./modal.module.css";
-import { toggleCreateModal } from "../../features/reducers";
+import { toggleUpdateModal } from "../../features/reducers";
 import { Editor } from "..";
 import { useState } from "react";
-import { useCreateNoteMutation } from "../../features/apis";
-import { ErrorResponse, INote } from "../../types";
-import { toast } from "react-toastify";
+import { useUpdateNoteMutation } from "../../features/apis";
+import { INote } from "../../types";
 
-const CreateModal = () => {
+type Props = {
+	note: INote;
+};
+
+const UpdateModal: React.FC<Props> = ({
+	note: {
+		_id,
+		title: defaultTitle,
+		content: defaultContent,
+		background: defaultBackground,
+		labels: defaultLebels,
+	},
+}) => {
 	const dispatch = useAppDispatch();
-	const [createNote, { data, error, isLoading }] = useCreateNoteMutation();
-	const [content, setContent] = useState<string>("");
-	const [background, setBackground] = useState<string>("#ebf2fa");
+	const [updateNote, { isLoading }] = useUpdateNoteMutation();
+	const [content, setContent] = useState<string>(defaultContent);
+	const [background, setBackground] = useState<string>(defaultBackground);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -22,10 +33,9 @@ const CreateModal = () => {
 		if (formData.get("study")) labels.push("study");
 		if (formData.get("health")) labels.push("health");
 		if (formData.get("office")) labels.push("office");
-    
-		createNote({ title, content, background, labels } as INote);
-		dispatch(toggleCreateModal());
-    error ? toast.error((error as ErrorResponse).data.message) : toast.success(data?.message);
+
+		updateNote({ _id, title, content, background, labels } as INote);
+		dispatch(toggleUpdateModal(""));
 	};
 
 	return (
@@ -33,11 +43,12 @@ const CreateModal = () => {
 			<div className={styles.wrapper} style={{ background: `${background}` }}>
 				<MdClose
 					className={styles.closeBtn}
-					onClick={() => dispatch(toggleCreateModal())}
+					onClick={() => dispatch(toggleUpdateModal(""))}
 				/>
 				<form onSubmit={handleSubmit}>
 					<input
 						name="title"
+						defaultValue={defaultTitle}
 						className={styles.title}
 						placeholder="Add title"
 						required
@@ -62,20 +73,40 @@ const CreateModal = () => {
 					</div>
 					<div className={styles.labels}>
 						<label>
-							<input type="checkbox" name="study" value="study" /> Study
+							<input
+								type="checkbox"
+								name="study"
+								value="study"
+								defaultChecked={defaultLebels.includes("study")}
+							/>{" "}
+							Study
 						</label>
 						<label>
-							<input type="checkbox" name="health" value="health" /> Health
+							<input
+								type="checkbox"
+								name="health"
+								value="health"
+								defaultChecked={defaultLebels.includes("health")}
+							/>{" "}
+							Health
 						</label>
 						<label>
-							<input type="checkbox" name="office" value="office" /> Office
+							<input
+								type="checkbox"
+								name="office"
+								value="office"
+								defaultChecked={defaultLebels.includes("office")}
+							/>{" "}
+							Office
 						</label>
 					</div>
-					<button className={styles.button} disabled={isLoading}>{isLoading ? "Creating..." : "Create"}</button>
+					<button className={styles.button} disabled={isLoading}>
+						{isLoading ? "Updating..." : "Update"}
+					</button>
 				</form>
 			</div>
 		</div>
 	);
 };
 
-export default CreateModal;
+export default UpdateModal;

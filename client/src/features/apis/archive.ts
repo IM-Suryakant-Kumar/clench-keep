@@ -7,7 +7,7 @@ const archive = api.injectEndpoints({
 	endpoints: build => ({
 		addToArchive: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: `/add/create/${body._id}`,
+				url: `/archive/add/${body._id}`,
 				method: "PATCH",
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },

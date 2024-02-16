@@ -7,7 +7,7 @@ const trash = api.injectEndpoints({
 	endpoints: build => ({
 		AddToTrash: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: `/trash/create/${body._id}`,
+				url: `/trash/add/${body._id}`,
 				method: "PATCH",
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
@@ -26,7 +26,7 @@ const trash = api.injectEndpoints({
 		}),
 		restoreFromTrash: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: `/trash/delete/${body._id}`,
+				url: `/trash/restore/${body._id}`,
 				method: "PATCH",
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),

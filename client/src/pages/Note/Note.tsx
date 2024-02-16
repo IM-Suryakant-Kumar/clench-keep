@@ -1,6 +1,5 @@
 import styles from "./note.module.css";
 import { useGetNotesQuery } from "../../features/apis";
-import { INote } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
 import { toggleCreateModal } from "../../features/reducers";
 import { CreateModal, NoteCard } from "../../components";
@@ -10,7 +9,7 @@ const Note = () => {
 	const showCreateModal = useAppSelector(state => state.modal.showCreateModal);
 	const dispatch = useAppDispatch();
 	const { data } = useGetNotesQuery();
-	const notes = data?.notes as INote[];
+	const notes = data?.notes;
 
 	return (
 		<div>
@@ -28,9 +27,12 @@ const Note = () => {
 			)}
 			{showCreateModal && <CreateModal />}
 			<div className={styles.cards}>
-				{notes?.filter(note => !note.isArchived && !note.isTrashed).map(note => (
-					<NoteCard key={note._id} note={note} type="note" />
-				))}
+				{notes
+					?.filter(note => !note.isArchived && !note.isTrashed)
+					.reverse()
+					.map(note => (
+						<NoteCard key={note._id} note={note} type="note" />
+					))}
 			</div>
 			<button
 				className={styles.modalBtn}

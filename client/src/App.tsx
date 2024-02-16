@@ -5,7 +5,7 @@ import {
 	createRoutesFromElements,
 } from "react-router-dom";
 import { AuthLayout, HostLayout, Layout } from "./components";
-import { Home, Login, NotFound, Signup, Note } from "./pages";
+import { Home, Login, NotFound, Signup, Note, Archive } from "./pages";
 
 function App() {
 	const router = createBrowserRouter(
@@ -14,7 +14,7 @@ function App() {
 				<Route index element={<Home />} />
 				<Route element={<HostLayout />}>
 					<Route path="note" element={<Note />} />
-					<Route path="archive" element={<h1>Archive</h1>} />
+					<Route path="archive" element={<Archive />} />
 					<Route path="trash" element={<h1>Trash</h1>} />
 				</Route>
 				<Route element={<AuthLayout />}>

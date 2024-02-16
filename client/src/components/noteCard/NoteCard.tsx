@@ -1,5 +1,5 @@
 import { FaRegEdit } from "react-icons/fa";
-import { IArchive, INote, ITrash } from "../../types";
+import { INote } from "../../types";
 import styles from "./noteCard.module.css";
 import parse from "html-react-parser";
 import { MdDeleteForever, MdRestore } from "react-icons/md";
@@ -7,7 +7,6 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { IoArchiveOutline } from "react-icons/io5";
 import {
 	useCreateArchiveMutation,
-	useCreateNoteMutation,
 	useCreateTrashMutation,
 	useDeleteArchiveMutation,
 	useDeleteNoteMutation,
@@ -16,7 +15,6 @@ import {
 import { UpdateModal } from "..";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
 import { toggleUpdateModal } from "../../features/reducers";
-import { toast } from "react-toastify";
 
 type Props = {
 	note: INote;
@@ -32,8 +30,6 @@ const NoteCard: React.FC<Props> = ({
 	);
 	const dispatch = useAppDispatch();
 
-	const [createNote, { isLoading: createNoteLoading }] =
-		useCreateNoteMutation();
 	const [deleteNote, { isLoading: deleteNoteLoading }] =
 		useDeleteNoteMutation();
 	const [createArchive, { isLoading: createArchiveLoading }] =
@@ -44,40 +40,6 @@ const NoteCard: React.FC<Props> = ({
 		useCreateTrashMutation();
 	const [deleteTrash, { isLoading: deleteTrashLoading }] =
 		useDeleteTrashMutation();
-
-	const handleArchive = () => {
-		createArchive({ noteId: _id } as IArchive);
-		deleteNote({ _id } as INote);
-    toast.success("Added to archive");
-	};
-
-	const handleTrash = () => {
-		createTrash({ noteId: _id } as ITrash);
-		deleteNote({ _id } as INote);
-    toast.success("Added to Trash")
-	};
-
-	const handleRestore = () => {
-		createNote({
-			title,
-			content,
-			background,
-			labels,
-			createdAt,
-			updatedAt,
-		} as INote);
-		type === "archive"
-			? deleteArchive({ noteId: _id } as IArchive)
-			: deleteTrash({ noteId: _id } as ITrash);
-    toast.success("Note restored")
-	};
-  
-	const handleDelete = () => {
-    type === "archive"
-    ? deleteArchive({ noteId: _id } as IArchive)
-    : deleteTrash({ noteId: _id } as ITrash);
-    toast.success("Note deleted")
-	};
 
 	return (
 		<div className={styles.container} style={{ background }}>
@@ -111,39 +73,39 @@ const NoteCard: React.FC<Props> = ({
 						/>
 						<IoArchiveOutline
 							className={styles.actionIcon}
-							aria-disabled={!(!createArchiveLoading && !deleteNoteLoading)}
-							onClick={handleArchive}
+							aria-disabled={createArchiveLoading}
+							onClick={() => createArchive({ _id } as INote)}
 						/>
 						<FaRegTrashCan
 							className={styles.actionIcon}
-							aria-disabled={!(!createTrashLoading && !deleteNoteLoading)}
-							onClick={handleTrash}
+							aria-disabled={createTrashLoading}
+							onClick={() => createTrash({ _id } as INote)}
 						/>
 					</div>
 				) : (
 					<div className={styles.actions}>
 						<MdRestore
 							className={styles.actionIcon}
-							onClick={handleRestore}
-							aria-disabled={
-								!(
-									!createNoteLoading &&
-									!deleteArchiveLoading &&
-									!deleteTrashLoading
-								)
+							aria-disabled={deleteArchiveLoading || deleteTrashLoading}
+							onClick={() =>
+								type === "archive"
+									? deleteArchive({ _id } as INote)
+									: deleteTrash({ _id } as INote)
 							}
 						/>
 						<MdDeleteForever
 							className={styles.actionIcon}
-							aria-disabled={!(!deleteArchiveLoading && !deleteTrashLoading)}
-							onClick={handleDelete}
+							aria-disabled={deleteNoteLoading}
+							onClick={() => deleteNote({ _id } as INote)}
 						/>
 					</div>
 				)}
 			</div>
 			{/* Update Modal */}
 			{showUpdateModalId === _id && (
-				<UpdateModal note={{ _id, title, content, background, labels } as INote} />
+				<UpdateModal
+					note={{ _id, title, content, background, labels } as INote}
+				/>
 			)}
 		</div>
 	);

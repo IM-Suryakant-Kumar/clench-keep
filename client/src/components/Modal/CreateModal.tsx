@@ -5,12 +5,11 @@ import { toggleCreateModal } from "../../features/reducers";
 import { Editor } from "..";
 import { useState } from "react";
 import { useCreateNoteMutation } from "../../features/apis";
-import { ErrorResponse, INote } from "../../types";
-import { toast } from "react-toastify";
+import { INote } from "../../types";
 
 const CreateModal = () => {
 	const dispatch = useAppDispatch();
-	const [createNote, { data, error, isLoading }] = useCreateNoteMutation();
+	const [createNote, { isLoading }] = useCreateNoteMutation();
 	const [content, setContent] = useState<string>("");
 	const [background, setBackground] = useState<string>("#ebf2fa");
 
@@ -25,7 +24,6 @@ const CreateModal = () => {
     
 		createNote({ title, content, background, labels } as INote);
 		dispatch(toggleCreateModal());
-    error ? toast.error((error as ErrorResponse).data.message) : toast.success(data?.message);
 	};
 
 	return (

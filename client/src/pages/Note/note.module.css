@@ -26,6 +26,22 @@
 	cursor: pointer;
 }
 
+.filterButtons {
+	margin: 1em 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em 2em;
+}
+
+.filterButton {
+	border: none;
+	padding: 0.4em 2em;
+	border-radius: 0.4em;
+	background: var(--logo-cl);
+	color: var(--primary-cl);
+	cursor: pointer;
+}
+
 .cards {
 	margin: 1em auto;
 	display: grid;
@@ -63,6 +79,10 @@
 
 	.btnIcon {
 		font-size: 2rem;
+	}
+
+	.filterButtons {
+		margin: 1em;
 	}
 
 	.cards {

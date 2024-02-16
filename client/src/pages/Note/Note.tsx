@@ -4,12 +4,18 @@ import { useAppDispatch, useAppSelector } from "../../features/hook";
 import { toggleCreateModal } from "../../features/reducers";
 import { CreateModal, NoteCard } from "../../components";
 import { IoPencilOutline } from "react-icons/io5";
+import { useSearchParams } from "react-router-dom";
 
 const Note = () => {
 	const showCreateModal = useAppSelector(state => state.modal.showCreateModal);
 	const dispatch = useAppDispatch();
 	const { data } = useGetNotesQuery();
-	const notes = data?.notes;
+	const [filterSearchParam, setFilterSearchParam] = useSearchParams();
+	const filter = filterSearchParam.get("filter");
+
+	let notes = data?.notes?.filter(note => !note.isArchived && !note.isTrashed);
+	// filter note
+	filter && (notes = notes?.filter(note => note.labels.includes(filter)));
 
 	return (
 		<div>
@@ -26,13 +32,70 @@ const Note = () => {
 				</div>
 			)}
 			{showCreateModal && <CreateModal />}
+			<div className={styles.filterButtons}>
+				<button
+					className={styles.filterButton}
+					style={{
+						background: `${filterSearchParam.get("filter") ? "" : "#333"}`,
+					}}
+					onClick={() =>
+						setFilterSearchParam((prevParams: URLSearchParams) => {
+							prevParams.delete("filter");
+							return prevParams;
+						})
+					}>
+					All
+				</button>
+				<button
+					className={styles.filterButton}
+					style={{
+						background: `${
+							filterSearchParam.get("filter") === "study" ? "#333" : ""
+						}`,
+					}}
+					onClick={() =>
+						setFilterSearchParam((prevParams: URLSearchParams) => {
+							prevParams.set("filter", "study");
+							return prevParams;
+						})
+					}>
+					Study
+				</button>
+				<button
+					className={styles.filterButton}
+					style={{
+						background: `${
+							filterSearchParam.get("filter") === "health" ? "#333" : ""
+						}`,
+					}}
+					onClick={() =>
+						setFilterSearchParam((prevParams: URLSearchParams) => {
+							prevParams.set("filter", "health");
+							return prevParams;
+						})
+					}>
+					Health
+				</button>
+				<button
+					className={styles.filterButton}
+					style={{
+						background: `${
+							filterSearchParam.get("filter") === "office" ? "#333" : ""
+						}`,
+					}}
+					onClick={() =>
+						setFilterSearchParam((prevParams: URLSearchParams) => {
+							prevParams.set("filter", "office");
+							return prevParams;
+						})
+					}>
+					Office
+				</button>
+			</div>
 			<div className={styles.cards}>
-				{notes
-					?.filter(note => !note.isArchived && !note.isTrashed)
-					.reverse()
-					.map(note => (
-						<NoteCard key={note._id} note={note} type="note" />
-					))}
+				{notes?.reverse().map(note => (
+					<NoteCard key={note._id} note={note} type="note" />
+				))}
 			</div>
 			<button
 				className={styles.modalBtn}

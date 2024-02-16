@@ -1,19 +1,9 @@
 import { Router } from "express";
-import {
-	createArchive,
-	deleteArchive,
-	getArchive,
-	getArchives,
-	updateArchive,
-} from "../controllers";
+import { createArchive, deleteArchive } from "../controllers";
 
 const router = Router();
 
-router.route("/").get(getArchives).post(createArchive);
-router
-	.route("/:noteId")
-	.get(getArchive)
-	.patch(updateArchive)
-	.delete(deleteArchive);
+router.route("/create/:_id").patch(createArchive);
+router.route("/delete/:_id").patch(deleteArchive);
 
 export default router;

@@ -8,6 +8,8 @@ const NoteSchema = new Schema<INote>(
 		content: { type: String, required: [true, "Please provide content"] },
 		background: { type: String },
 		labels: [{ type: String }],
+    isArchived: { type: Boolean, default: false},
+    isTrashed: { type: Boolean, default: false},
 	},
 	{ timestamps: true }
 );

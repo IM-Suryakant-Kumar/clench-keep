@@ -16,7 +16,7 @@ export const createNote = async (req: INoteReq, res: Response) => {
 
 export const getNote = async (req: INoteReq, res: Response) => {
 	const note = await Note.findOne({
-		_id: req.params.noteId,
+		_id: req.params._id,
 		userId: req.user._id,
 	});
 	res.status(200).json({ success: true, note });
@@ -24,7 +24,7 @@ export const getNote = async (req: INoteReq, res: Response) => {
 
 export const updateNote = async (req: INoteReq, res: Response) => {
 	const note = await Note.findOneAndUpdate(
-		{ _id: req.params.noteId, userId: req.user._id },
+		{ _id: req.params._id, userId: req.user._id },
 		req.body,
 		{
 			new: true,
@@ -36,6 +36,6 @@ export const updateNote = async (req: INoteReq, res: Response) => {
 };
 
 export const deleteNote = async (req: INoteReq, res: Response) => {
-	await Note.findOneAndDelete({ _id: req.params.noteId, userId: req.user._id });
+	await Note.findOneAndDelete({ _id: req.params._id, userId: req.user._id });
 	res.status(201).json({ success: true, message: "Note deleted successfully" });
 };

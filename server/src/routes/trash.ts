@@ -1,19 +1,12 @@
 import { Router } from "express";
 import {
 	createTrash,
-	deleteTrash,
-	getTrash,
-	getTrashes,
-	updateTrash,
+	deleteTrash
 } from "../controllers";
 
 const router = Router();
 
-router.route("/").get(getTrashes).post(createTrash);
-router
-	.route("/:noteId")
-	.get(getTrash)
-	.patch(updateTrash)
-	.delete(deleteTrash);
+router.route("/create/:_id").patch(createTrash);
+router.route("/delete/:_id").patch(deleteTrash);
 
 export default router;

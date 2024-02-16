@@ -5,11 +5,11 @@ import styles from "./archive.module.css";
 
 const Archive = () => {
 	const { data } = useGetNotesQuery();
-	const notes = data?.notes;
+	const archivedNotes = data?.notes.filter(note => note.isArchived);
 
 	return (
 		<div>
-			{notes?.length === 0 && (
+			{archivedNotes?.length === 0 && (
 				<div className={styles.emptyCont}>
 					<p className={styles.emptyDesc}>
 						You don't have any note archived yet. Wanna archive?
@@ -20,12 +20,9 @@ const Archive = () => {
 				</div>
 			)}
 			<div className={styles.cards}>
-				{notes
-					?.filter(note => note.isArchived)
-					.reverse()
-					.map(note => (
-						<NoteCard key={note._id} note={note} type="archive" />
-					))}
+				{archivedNotes?.reverse().map(note => (
+					<NoteCard key={note._id} note={note} type="archive" />
+				))}
 			</div>
 		</div>
 	);

@@ -2,15 +2,18 @@ import { FaRegEdit } from "react-icons/fa";
 import { INote } from "../../types";
 import styles from "./noteCard.module.css";
 import parse from "html-react-parser";
-import { MdDeleteForever, MdRestore } from "react-icons/md";
+import {
+	MdOutlineDeleteForever,
+	MdSettingsBackupRestore,
+} from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoArchiveOutline } from "react-icons/io5";
 import {
-  useAddToArchiveMutation,
+	useAddToArchiveMutation,
 	useAddToTrashMutation,
 	useDeleteNoteMutation,
-  useRestoreFromArchiveMutation,
-  useRestoreFromTrashMutation,
+	useRestoreFromArchiveMutation,
+	useRestoreFromTrashMutation,
 } from "../../features/apis";
 import { UpdateModal } from "..";
 import { useAppDispatch, useAppSelector } from "../../features/hook";
@@ -34,8 +37,8 @@ const NoteCard: React.FC<Props> = ({
 		useDeleteNoteMutation();
 	const [addToArchive, { isLoading: addToArchiveLoading }] =
 		useAddToArchiveMutation();
-    const [addToTrash, { isLoading: addToTrashLoading }] =
-      useAddToTrashMutation();
+	const [addToTrash, { isLoading: addToTrashLoading }] =
+		useAddToTrashMutation();
 	const [restoreFromArchive, { isLoading: restoreFromArchiveLoading }] =
 		useRestoreFromArchiveMutation();
 	const [restoreFromTrash, { isLoading: restoreFromTrashLoading }] =
@@ -84,16 +87,18 @@ const NoteCard: React.FC<Props> = ({
 					</div>
 				) : (
 					<div className={styles.actions}>
-						<MdRestore
+						<MdSettingsBackupRestore
 							className={styles.actionIcon}
-							aria-disabled={restoreFromArchiveLoading || restoreFromTrashLoading}
+							aria-disabled={
+								restoreFromArchiveLoading || restoreFromTrashLoading
+							}
 							onClick={() =>
 								type === "archive"
 									? restoreFromArchive({ _id } as INote)
 									: restoreFromTrash({ _id } as INote)
 							}
 						/>
-						<MdDeleteForever
+						<MdOutlineDeleteForever
 							className={styles.actionIcon}
 							aria-disabled={deleteNoteLoading}
 							onClick={() => deleteNote({ _id } as INote)}

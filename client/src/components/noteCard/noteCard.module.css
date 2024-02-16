@@ -58,4 +58,11 @@
 .actionIcon {
 	font-weight: 600;
 	font-size: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+	.actionIcon {
+		font-size: 1.3rem;
+	}
 }

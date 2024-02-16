@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createTrash, restoreTrash } from "../controllers";
+import { AddToTrash, restoreFromTrash } from "../controllers";
 
 const router = Router();
 
-router.route("/create/:_id").patch(createTrash);
-router.route("/delete/:_id").patch(restoreTrash);
+router.route("/add/:_id").patch(AddToTrash);
+router.route("/restore/:_id").patch(restoreFromTrash);
 
 export default router;

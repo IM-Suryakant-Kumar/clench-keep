@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createArchive, restoreArchive } from "../controllers";
+import { addToArchive, restoreFromArchive } from "../controllers";
 
 const router = Router();
 
-router.route("/create/:_id").patch(createArchive);
-router.route("/delete/:_id").patch(restoreArchive);
+router.route("/add/:_id").patch(addToArchive);
+router.route("/restore/:_id").patch(restoreFromArchive);
 
 export default router;

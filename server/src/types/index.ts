@@ -20,8 +20,10 @@ export interface INote extends Document {
   userId: string;
 	title: string;
 	content: string;
-	backgound: string;
+	background: string;
 	labels: string[];
+  isArchived: boolean;
+  isTrashed: boolean;
 }
 
 export interface INoteReq extends Request {
@@ -32,29 +34,5 @@ export interface INoteReq extends Request {
 		labels?: string[];
 	};
   user: IUser;
-	params: { noteId?: string };
-}
-
-// Archive
-export interface IArchive extends Document {
-	userId: string;
-	noteId: string;
-}
-
-export interface IArchiveReq extends Request {
-	body: { noteId?: string };
-  params: { noteId?: string };
-  user: IUser;
-}
-
-// Trash
-export interface ITrash extends Document {
-	userId: string;
-	noteId: string;
-}
-
-export interface ITrashReq extends Request {
-	body: { noteId?: string };
-  params: { noteId?: string };
-  user: IUser;
+	params: { _id?: string };
 }

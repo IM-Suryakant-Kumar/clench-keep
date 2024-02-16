@@ -3,3 +3,7 @@ export { default as HostLayout } from "./Layouts/HostLayout";
 export { default as AuthLayout } from "./Layouts/AuthLayout";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as Sidebar } from "./Sidebar/Sidebar";
+export { default as CreateModal } from "./Modal/CreateModal";
+export { default as UpdateModal } from "./Modal/UpdateModal";
+export { default as Editor } from "./Editor/Editor";
+export { default as NoteCard } from "./NoteCard/NoteCard";

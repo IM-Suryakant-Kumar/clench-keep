@@ -33,6 +33,10 @@ a.active {
 	padding: 3.5em 0.5em;
 }
 
+.ql-editor {
+	min-height: 8rem;
+}
+
 @media screen and (min-width: 768px) {
 	a.active {
 		border: none;
@@ -41,7 +45,7 @@ a.active {
 	}
 
 	.hostLayout {
-		padding: 4.5em 0.5em;
+		padding: 4.5em 0.5em 0 0.5em;
 	}
 
 	.hostLayout {

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./sidebar.module.css";
 import { TfiPencilAlt2 } from "react-icons/tfi";
-import { MdOutlineArchive } from "react-icons/md";
+import { IoArchiveOutline } from "react-icons/io5";
 import { BsTrash } from "react-icons/bs";
 
 const Sidebar = () => {
@@ -12,7 +12,7 @@ const Sidebar = () => {
 				<span className={styles.title}>Note</span>
 			</NavLink>
 			<NavLink to="/archive" className={styles.link}>
-				<MdOutlineArchive className={styles.icon} />
+				<IoArchiveOutline className={styles.icon} />
 				<span className={styles.title}>Archive</span>
 			</NavLink>
 			<NavLink to="/trash" className={styles.link}>

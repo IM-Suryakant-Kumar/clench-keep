@@ -1,39 +1,13 @@
 import { toast } from "react-toastify";
-import { ErrorResponse, IArchive, Response } from "../../types";
+import { ErrorResponse, INote, SuccessResponse } from "../../types";
 import { getTokenFromLocalStorage } from "../../utils";
 import api from "../api";
 
 const archive = api.injectEndpoints({
 	endpoints: build => ({
-		getArchives: build.query<Response, void>({
-			query: () => ({
-				url: "/archive",
-				method: "GET",
-				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			}),
-			providesTags: result =>
-				result ? [{ type: "archive", id: "LIST" }] : ["archive"],
-		}),
-		createArchive: build.mutation<Response, IArchive>({
+		addToArchive: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: "/archive",
-				method: "POST",
-				body,
-				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			}),
-			invalidatesTags: (result, error) => {
-				if (result) {
-					toast.success(result.message);
-				} else {
-					const errorMessage = (error as ErrorResponse).data.message;
-					toast.error(errorMessage);
-				}
-				return result ? ["archive"] : [{ type: "archive", id: "ERROR" }];
-			},
-		}),
-		updateArchive: build.mutation<Response, IArchive>({
-			query: body => ({
-				url: `/archive/${body.noteId}`,
+				url: `/archive/add/${body._id}`,
 				method: "PATCH",
 				body,
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
@@ -46,14 +20,14 @@ const archive = api.injectEndpoints({
 					toast.error(errorMessage);
 				}
 				return result
-					? [{ type: "archive", id: "LIST" }]
-					: [{ type: "archive", id: "ERROR" }];
+					? [{ type: "note", id: "LIST" }]
+					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
-		deleteArchive: build.mutation<Response, IArchive>({
+		restoreFromArchive: build.mutation<SuccessResponse, INote>({
 			query: body => ({
-				url: `/archive/${body.noteId}`,
-				method: "DELETE",
+				url: `/archive/restore/${body._id}`,
+				method: "PATCH",
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 			}),
 			invalidatesTags: (result, error) => {
@@ -64,16 +38,12 @@ const archive = api.injectEndpoints({
 					toast.error(errorMessage);
 				}
 				return result
-					? [{ type: "archive", id: "LIST" }]
-					: [{ type: "archive", id: "ERROR" }];
+					? [{ type: "note", id: "LIST" }]
+					: [{ type: "note", id: "ERROR" }];
 			},
 		}),
 	}),
 });
 
-export const {
-	useGetArchivesQuery,
-	useCreateArchiveMutation,
-	useUpdateArchiveMutation,
-	useDeleteArchiveMutation,
-} = archive;
+export const { useAddToArchiveMutation, useRestoreFromArchiveMutation } =
+	archive;

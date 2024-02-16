@@ -1,0 +1,68 @@
+.container {
+	border-radius: 0.4em;
+	padding: 0.625em;
+	box-shadow: 1px 1px 1px 1px #00000020, -1px -1px 1px 1px #00000020;
+	line-height: 1.5em;
+}
+
+.title {
+	font-weight: 600;
+}
+
+.content {
+	font-size: small;
+}
+
+.date {
+	margin-top: 1em;
+	font-size: x-small;
+	line-height: 1.4em;
+	display: flex;
+	gap: 1em;
+}
+
+.lightBold {
+	font-weight: 500;
+}
+
+.actionsAndLabels {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1em;
+	margin-top: 1em;
+}
+
+.labels {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+}
+
+.label {
+	padding: 0 1em;
+	background: var(--secondary-cl);
+	font-size: x-small;
+	font-weight: 600;
+	border-radius: 0.5em;
+	line-height: 1.6em;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	flex-wrap: wrap;
+}
+
+.actionIcon {
+	font-weight: 600;
+	font-size: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+	.actionIcon {
+		font-size: 1.3rem;
+	}
+}

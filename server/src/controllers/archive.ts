@@ -10,10 +10,10 @@ export const createArchive = async (req: INoteReq, res: Response) => {
 	res.status(201).json({ success: true, message: "Note Added to archive" });
 };
 
-export const deleteArchive = async (req: INoteReq, res: Response) => {
+export const restoreArchive = async (req: INoteReq, res: Response) => {
 	await Note.findOneAndUpdate(
 		{ _id: req.params._id, userId: req.user },
 		{ isArchived: false }
 	);
-	res.status(200).json({ success: true, message: "Note removed from Archive" });
+	res.status(200).json({ success: true, message: "Note restored from Archive" });
 };

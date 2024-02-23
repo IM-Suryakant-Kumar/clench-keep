@@ -10,36 +10,41 @@ const Note = () => {
 	const showCreateModal = useAppSelector(state => state.modal.showCreateModal);
 	const dispatch = useAppDispatch();
 	const { data } = useGetNotesQuery();
-	const [filterSearchParam, setFilterSearchParam] = useSearchParams();
-	const filter = filterSearchParam.get("filter");
+	const [searchParams, setSearchParams] = useSearchParams();
+	const filter = searchParams.get("filter");
+	const search = searchParams.get("search");
 
 	let notes = data?.notes?.filter(note => !note.isArchived && !note.isTrashed);
 	// filter note
 	filter && (notes = notes?.filter(note => note.labels.includes(filter)));
+	// search
+	search &&
+		(notes = notes?.filter(note =>
+			note.title.toLowerCase().includes(search.toLowerCase())
+		));
 
-	return (
+	return notes?.length === 0 ? (
+		<div className={styles.emptyCont}>
+			<p className={styles.emptyDesc}>
+				You don't have any note yet. Create one
+			</p>
+			<button
+				className={styles.emptyBtn}
+				onClick={() => dispatch(toggleCreateModal())}>
+				CREATE NOTE
+			</button>
+		</div>
+	) : (
 		<div>
-			{notes?.length === 0 && (
-				<div className={styles.emptyCont}>
-					<p className={styles.emptyDesc}>
-						You don't have any note yet. Create one
-					</p>
-					<button
-						className={styles.emptyBtn}
-						onClick={() => dispatch(toggleCreateModal())}>
-						CREATE NOTE
-					</button>
-				</div>
-			)}
 			{showCreateModal && <CreateModal />}
 			<div className={styles.filterButtons}>
 				<button
 					className={styles.filterButton}
 					style={{
-						background: `${filterSearchParam.get("filter") ? "" : "#333"}`,
+						background: `${searchParams.get("filter") ? "" : "#333"}`,
 					}}
 					onClick={() =>
-						setFilterSearchParam((prevParams: URLSearchParams) => {
+						setSearchParams((prevParams: URLSearchParams) => {
 							prevParams.delete("filter");
 							return prevParams;
 						})
@@ -50,11 +55,11 @@ const Note = () => {
 					className={styles.filterButton}
 					style={{
 						background: `${
-							filterSearchParam.get("filter") === "study" ? "#333" : ""
+							searchParams.get("filter") === "study" ? "#333" : ""
 						}`,
 					}}
 					onClick={() =>
-						setFilterSearchParam((prevParams: URLSearchParams) => {
+						setSearchParams((prevParams: URLSearchParams) => {
 							prevParams.set("filter", "study");
 							return prevParams;
 						})
@@ -65,11 +70,11 @@ const Note = () => {
 					className={styles.filterButton}
 					style={{
 						background: `${
-							filterSearchParam.get("filter") === "health" ? "#333" : ""
+							searchParams.get("filter") === "health" ? "#333" : ""
 						}`,
 					}}
 					onClick={() =>
-						setFilterSearchParam((prevParams: URLSearchParams) => {
+						setSearchParams((prevParams: URLSearchParams) => {
 							prevParams.set("filter", "health");
 							return prevParams;
 						})
@@ -80,11 +85,11 @@ const Note = () => {
 					className={styles.filterButton}
 					style={{
 						background: `${
-							filterSearchParam.get("filter") === "office" ? "#333" : ""
+							searchParams.get("filter") === "office" ? "#333" : ""
 						}`,
 					}}
 					onClick={() =>
-						setFilterSearchParam((prevParams: URLSearchParams) => {
+						setSearchParams((prevParams: URLSearchParams) => {
 							prevParams.set("filter", "office");
 							return prevParams;
 						})

@@ -1,6 +1,6 @@
 <div align="center">
 
-# ClenchSnap
+# ClenchKeep
 
 A Note app made using mern stack with TypeScript
 

@@ -33,4 +33,8 @@ A Note app made using mern stack with TypeScript
 - JWT for authentication
 - bcryptjs for password hashing
 
+## Demo
+
+https://github.com/IM-Suryakant-Kumar/ClenchKeep/assets/66691162/3ff177fc-525c-47ca-86be-740ddff3520c
+
 

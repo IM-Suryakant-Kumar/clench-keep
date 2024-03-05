@@ -10,6 +10,11 @@ export const register = async (req: IReq, res: Response) => {
 	if (!(name && email && password))
 		throw new BadRequestError("Please provide all values");
 
+	const emailAlreadyExists = await User.findOne({ email });
+	if (emailAlreadyExists) {
+		throw new BadRequestError("Email is already exists");
+	}
+
 	const user = await User.create({ name, email, password });
 
 	sendToken(res, 201, user, "Registered Successfuly!");
@@ -53,7 +58,10 @@ export const guestLogin = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
-	res.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true }).status(200).json({success: true, message: "Successfully logout!"});
+	res
+		.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+		.status(200)
+		.json({ success: true, message: "Successfully logout!" });
 };
 
 // get profile

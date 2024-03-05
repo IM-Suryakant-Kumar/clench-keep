@@ -17,6 +17,10 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body;
     if (!(name && email && password))
         throw new errors_1.BadRequestError("Please provide all values");
+    const emailAlreadyExists = yield models_1.User.findOne({ email });
+    if (emailAlreadyExists) {
+        throw new errors_1.BadRequestError("Email is already exists");
+    }
     const user = yield models_1.User.create({ name, email, password });
     (0, utils_1.sendToken)(res, 201, user, "Registered Successfuly!");
 });
@@ -49,7 +53,10 @@ const guestLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.guestLogin = guestLogin;
 const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true }).status(200).json({ success: true, message: "Successfully logout!" });
+    res
+        .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+        .status(200)
+        .json({ success: true, message: "Successfully logout!" });
 });
 exports.logout = logout;
 // get profile

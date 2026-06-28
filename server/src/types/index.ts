@@ -33,6 +33,6 @@ export interface INoteReq extends Request {
 		background?: string;
 		labels?: string[];
 	};
-  user: IUser;
+  user?: IUser;
 	params: { _id?: string };
 }

@@ -1,14 +1,14 @@
 import { Response } from "express";
-import { INoteReq } from "index";
 import { Note } from "../models";
+import { INoteReq } from "../types";
 
 export const getNotes = async (req: INoteReq, res: Response) => {
-	const notes = await Note.find({ userId: req.user._id });
+	const notes = await Note.find({ userId: req.user?._id });
 	res.status(200).json({ success: true, notes });
 };
 
 export const createNote = async (req: INoteReq, res: Response) => {
-	const note = await Note.create({ userId: req.user._id, ...req.body });
+	const note = await Note.create({ userId: req.user?._id, ...req.body });
 	res
 		.status(201)
 		.json({ success: true, note, message: "Note created successfully" });

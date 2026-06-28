@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { IUser } from "index";
+import { IUser } from "../types";
 
 export const sendToken = (
 	res: Response,

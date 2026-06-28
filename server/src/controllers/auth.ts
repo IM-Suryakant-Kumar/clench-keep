@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { IReq } from "index";
 import { BadRequestError, UnauthenticatedError } from "../errors";
 import { User } from "../models";
 import { sendToken } from "../utils";
+import { IReq } from "../types";
 
 export const register = async (req: IReq, res: Response) => {
 	const { name, email, password } = req.body;
@@ -39,8 +39,8 @@ export const login = async (req: IReq, res: Response) => {
 };
 
 export const guestLogin = async (req: Request, res: Response) => {
-	const email: string = process.env.GUEST_EMAIL;
-	const password: string = process.env.GUEST_PASSWORD;
+	const email = process.env.GUEST_EMAIL;
+	const password = process.env.GUEST_PASSWORD;
 
 	if (!(email && password))
 		throw new BadRequestError("Please provide all values");

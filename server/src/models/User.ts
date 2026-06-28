@@ -1,7 +1,7 @@
-import { IUser } from "index";
 import { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { IUser } from "../types";
 
 const UserSchema = new Schema<IUser>(
 	{
@@ -22,7 +22,7 @@ const UserSchema = new Schema<IUser>(
 			select: false,
 		},
 	},
-	{ timestamps: true }
+	{ timestamps: true },
 );
 
 UserSchema.pre("save", async function () {
@@ -32,17 +32,14 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.comparePassword = async function (
-	candidatePassword: string
+	candidatePassword: string,
 ) {
 	return await bcrypt.compare(candidatePassword, this.password);
 };
 
 UserSchema.methods.createJWTToken = function () {
-	const JWT_SECRET: string = process.env.JWT_SECRET;
-	const JWT_LIFETIME: string = process.env.JWT_LIFETIME;
-
-	return jwt.sign({ _id: this._id, name: this.name }, JWT_SECRET, {
-		expiresIn: JWT_LIFETIME,
+	return jwt.sign({ _id: this._id, name: this.name }, process.env.JWT_SECRET!, {
+		expiresIn: "5d",
 	});
 };
 

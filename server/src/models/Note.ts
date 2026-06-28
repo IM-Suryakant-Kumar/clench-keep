@@ -1,5 +1,5 @@
-import { INote } from "index";
 import { Schema, model } from "mongoose";
+import { INote } from "../types";
 
 const NoteSchema = new Schema<INote>(
 	{
@@ -8,10 +8,10 @@ const NoteSchema = new Schema<INote>(
 		content: { type: String, required: [true, "Please provide content"] },
 		background: { type: String },
 		labels: [{ type: String }],
-    isArchived: { type: Boolean, default: false},
-    isTrashed: { type: Boolean, default: false},
+		isArchived: { type: Boolean, default: false },
+		isTrashed: { type: Boolean, default: false },
 	},
-	{ timestamps: true }
+	{ timestamps: true },
 );
 
 export default model<INote>("Note", NoteSchema);

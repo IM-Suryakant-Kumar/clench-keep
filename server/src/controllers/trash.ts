@@ -1,6 +1,6 @@
 import { Response } from "express";
-import { INoteReq } from "index";
 import { Note } from "../models";
+import { INoteReq } from "../types";
 
 export const AddToTrash = async (req: INoteReq, res: Response) => {
 	await Note.findByIdAndUpdate(req.params._id, { isTrashed: true });

@@ -5,7 +5,6 @@ import connectDB from "./db";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import {
 	notFoundMiddleware,
 	errorHandlerMiddleware,
@@ -22,7 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(cors({ origin: process.env.CLIENT_URL!, credentials: true }));
-app.use(cookieParser())
 
 // routers
 app.use("/auth", authRouter);

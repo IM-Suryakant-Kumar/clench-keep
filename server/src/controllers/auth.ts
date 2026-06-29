@@ -58,10 +58,7 @@ export const guestLogin = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
-	res
-		.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
-		.status(200)
-		.json({ success: true, message: "Successfully logout!" });
+	res.status(200).json({ success: true, message: "Successfully logout!" });
 };
 
 // get profile
